@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/LuxB"
+            android:id="@+id/textHead"
+            android:layout_alignBottom="@+id/ambl"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:id="@+id/ambl"
+            android:background="@drawable/pmbl"
+            android:contentDescription="@string/Dawn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBarB"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/space"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Space
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_below="@+id/textHead"
+            android:layout_alignRight="@+id/textHead"
+            android:layout_alignEnd="@+id/textHead"
+            android:id="@+id/space" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/PercentSign"
+            android:id="@+id/textPercent"
+            android:layout_alignTop="@+id/textHead"
+            android:layout_alignRight="@+id/seekBarB"
+            android:layout_alignEnd="@+id/seekBarB" />
+
+
+    </RelativeLayout>
+</ScrollView>

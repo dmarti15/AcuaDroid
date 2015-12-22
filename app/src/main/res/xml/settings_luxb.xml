@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:key="pref_LuxB"
+    android:title="@string/LuxB"
+    android:icon="@drawable/pmbl">
+    <PreferenceCategory
+        android:key="DawnB"
+        android:title="@string/Dawn">
+
+        <EditTextPreference
+            android:key="ambli"
+            android:title="@string/Ini"
+            android:summary="@string/IniDawn"
+            android:inputType="number"
+            android:defaultValue="17"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <EditTextPreference
+            android:key="amble"
+            android:title="@string/End"
+            android:summary="@string/EndDawn"
+            android:inputType="number"
+            android:defaultValue="19"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="DuskB"
+        android:title="@string/Dusk">
+
+        <EditTextPreference
+            android:key="pmbli"
+            android:title="@string/Ini"
+            android:summary="@string/IniDusk"
+            android:inputType="number"
+            android:defaultValue="22"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <EditTextPreference
+            android:key="pmble"
+            android:title="@string/End"
+            android:summary="@string/EndDusk"
+            android:inputType="number"
+            android:defaultValue="23"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+    </PreferenceCategory>
+
+    <EditTextPreference
+        android:key="powerA"
+        android:title="@string/MaxPower"
+        android:summary="@string/LuxPower"
+        android:inputType="number"
+        android:defaultValue="60"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+</PreferenceScreen>

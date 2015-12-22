@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AcuaDroid</string>
+    <string name="action_settings">Opciones</string>
+    <string name="action_lux">Luces</string>
+    <string name="action_temp">Temperatura</string>
+    <string name="action_levl">Nivel</string>
+    <string name="action_feed">Comida</string>
+    <string name="txt_FloatingButton">Dando de comer a los peces</string>
+
+
+    <string name="LuxB">Luz Blanca</string>
+    <string name="LuxA">Luz Azul</string>
+
+
+
+
+
+
+</resources>

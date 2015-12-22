@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_luxa"
+        android:icon="@drawable/icon_pmaz"
+        android:summary="@string/sum_luxa" >
+        <extra
+            android:name="settings"
+            android:value="luxa"/>
+    </header>
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_luxb"
+        android:icon="@drawable/icon_pmbl"
+        android:summary="@string/sum_luxb" >
+        <extra
+            android:name="settings"
+            android:value="luxb"/>
+    </header>
+
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_temp"
+        android:icon="@drawable/icon_temp"
+        android:summary="@string/sum_temp" >
+        <extra
+            android:name="settings"
+            android:value="temp"/>
+    </header>
+
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_levl"
+        android:icon="@drawable/icon_levl"
+        android:summary="@string/sum_levl" >
+        <extra
+            android:name="settings"
+            android:value="levl"/>
+    </header>
+
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_feed"
+        android:icon="@drawable/icon_feed"
+        android:summary="@string/sum_feed" >
+        <extra
+            android:name="settings"
+            android:value="feed"/>
+    </header>
+
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_twitter"
+        android:summary="Datos de Twitter"
+        android:icon="@drawable/icon_twitter">
+
+        <extra android:name="settings" android:value="twitter" />
+    </header>
+</preference-headers>

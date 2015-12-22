@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+            android:key="DawnA"
+            android:title="@string/Dawn">
+
+            <EditTextPreference
+                android:key="amazi"
+                android:title="@string/Ini"
+                android:summary="@string/IniDawn"
+                android:inputType="number"
+                android:defaultValue="15"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+
+            <EditTextPreference
+                android:key="amaze"
+                android:title="@string/End"
+                android:summary="@string/EndDawn"
+                android:inputType="number"
+                android:defaultValue="17"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceCategory>
+        <PreferenceCategory
+            android:key="DuskA"
+            android:title="@string/Dusk">
+
+            <EditTextPreference
+                android:key="pmazi"
+                android:title="@string/Ini"
+                android:summary="@string/IniDusk"
+                android:inputType="number"
+                android:defaultValue="22"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+
+            <EditTextPreference
+                android:key="pmaze"
+                android:title="@string/End"
+                android:summary="@string/EndDusk"
+                android:inputType="number"
+                android:defaultValue="24"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceCategory>
+        <PreferenceCategory
+            android:key="PowerB"
+            android:title="@string/Dawn">
+
+            <EditTextPreference
+                android:key="powerA"
+                android:title="@string/MaxPower"
+                android:summary="@string/LuxPower"
+                android:inputType="number"
+                android:defaultValue="60"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceCategory>
+</PreferenceScreen>

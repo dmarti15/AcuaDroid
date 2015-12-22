@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nombre Actividad Ajustes-->
+    <string name="title_activity_settings">Configuración</string>
+
+    <!-- Titulos de Grupos-->
+    <string name="pref_luxa">Luz Azul</string>
+    <string name="pref_luxb">Luz Blanca</string>
+    <string name="pref_temp">Temperatura</string>
+    <string name="pref_levl">Nivel del Rellenador</string>
+    <string name="pref_feed">Alimentador Automático</string>
+    <string name="pref_twitter">Twitter</string>
+
+    <!-- Sumarios de Grupos-->
+    <string name="sum_luxa">Configuración de la luz azul</string>
+    <string name="sum_luxb">Configuración de la luz blanca</string>
+    <string name="sum_temp">Configuración de la temperatura</string>
+    <string name="sum_levl">Configuración del nivel de agua del rellenador</string>
+    <string name="sum_feed">Configuración del alimentador automático</string>
+    <string name="sum_twitter">Configuración de Twitter</string>
+
+    <!-- GENERALES -->
+    <!-- Preferencia Miniaturas -->
+    <string name="pref_miniaturas">Mostrar Miniaturas</string>
+
+    <!-- Preferencia Número de Articulos -->
+    <string name="pref_numArticulos_titulo">Número de Artículos</string>
+    <string-array name="pref_numArticulos_entradas">
+        <item>6</item>
+        <item>8</item>
+        <item>12</item>
+        <item>16</item>
+    </string-array>
+    <string-array name="pref_numArticulos_valores">
+        <item>6</item>
+        <item>8</item>
+        <item>12</item>
+        <item>16</item>
+    </string-array>
+    <string name="pref_numArticulos_resumen">Número máximo de artículos en la lista</string>
+
+    <!-- Preferencias Cuenta Twitter -->
+    <string name="pref_usuario_titulo">Usuario</string>
+    <string name="pref_usuario_resumen">Tu nombre de usuario en Twitter</string>
+
+    <string name="pref_contraseña_titulo">Contraseña</string>
+    <string name="pref_contraseña_resumen">Tu Contraseña de Twitter</string>
+
+
+    <string name="LigthCFG">Configuracion de Luces</string>
+    <string name="Dawn">Amanecer</string>
+    <string name="Dusk">Anochecer</string>
+    <string name="amaz">Amanecer Azul</string>
+    <string name="pmaz">Anochecer Azul</string>
+    <string name="ambl">Amanecer Blanco</string>
+    <string name="pmbl">Anochecer Azul</string>
+    <string name="dura">Duración:</string>
+    <string name="Ini">Inicio:</string>
+    <string name="End">Fin:</string>
+    <string name="IniDawn">La luz empieza a encenderse a las %s </string>
+    <string name="EndDawn">La luz llega al máximo a las %s</string>
+    <string name="IniDusk">La luz empieza a apagarse a las %s</string>
+    <string name="EndDusk">La luz se apaga a las %d</string>
+    <string name="MaxPower">Potencia</string>
+    <string name="LuxPower">Potencia máxima de las luces %d%</string>
+
+
+    <string name="PositiveButton">Aceptar</string>
+    <string name="NegativeButton">Cancelar</string>
+
+
+    <string name="temp">Temperatura</string>
+    <string name="mintemplow">15</string>
+    <string name="mintemphigh">30</string>
+    <string name="maxtemplow">20</string>
+    <string name="maxtemphigh">35</string>
+    <string name="Calentador">Tª Máxima: %dº</string>
+    <string name="Enfriador">Tª Mínima: %dº</string>
+    <string name="grados"> º</string>
+    <string name="ErrorTemp">La temperatura máxima no es mayor que la mínima</string>
+    <string name="Max">Max</string>
+    <string name="Min">Min</string>
+
+
+    <string name="tank">Configuración del Depósito</string>
+    <string name="level">Nivel del Rellenador</string>
+    <string name="LevelSize">Tamaño</string>
+    <string name="sumLevelSize">Tamaño en litros del depósito</string>
+
+    <string name="ConfigAlarma">Configuración de la Alarma</string>
+    <string name="LevelAlarma">Alarma</string>
+    <string name="sumLevelAlarma">Nivel de agua al que saltará la alarma</string>
+    <string name="Litros">Litros</string>
+    <string name="LitrosSign">L</string>
+    <string name="Percent">Porcentaje</string>
+    <string name="PercentSign">%</string>
+
+
+    <string name="feedActive">Activo</string>
+    <string name="sumfeedActive">Activa para alimentar</string>
+    <string name="feedHora">Hora</string>
+    <string name="sumfeedHora">Hora de comer</string>
+    <string name="feedVueltas">Vueltas</string>
+    <string name="sumfeedVueltas">Nº de vueltas que dará el alimentador</string>
+    <string name="feed1">1ª Comida</string>
+    <string name="feed2">2ª Comida</string>
+    <string name="feed3">3ª Comida</string>
+    <string name="feed4">4ª Comida</string>
+    <string name="feed5">5ª Comida</string>
+
+
+
+</resources>

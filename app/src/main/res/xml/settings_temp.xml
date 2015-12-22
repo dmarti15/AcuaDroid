@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:key="pref_temp"
+    android:title="@string/temp"
+    android:icon="@drawable/temp">
+    <!-- Usuario de Twitter -->
+    <EditTextPreference
+        android:key="temp_max"
+        android:title="@string/Max"
+        android:summary="@string/Calentador"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+
+    <!-- Password de Twitter -->
+    <EditTextPreference
+        android:key="temp_min"
+        android:title="@string/Min"
+        android:summary="@string/Enfriador"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        android:singleLine="true" />
+
+</PreferenceScreen>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- PREFERENCIAS GENERALES -->
+    <PreferenceScreen
+        android:key="pref_LuxA"
+        android:title="@string/LuxA"
+        android:icon="@drawable/pmaz">
+        <PreferenceCategory
+            android:key="DawnA"
+            android:title="@string/Dawn">
+
+            <EditTextPreference
+                android:key="amazi"
+                android:title="@string/Ini"
+                android:summary="@string/IniDawn"
+                android:inputType="number"
+                android:defaultValue="15"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+
+            <EditTextPreference
+                android:key="amaze"
+                android:title="@string/End"
+                android:summary="@string/EndDawn"
+                android:inputType="number"
+                android:defaultValue="17"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceCategory>
+        <PreferenceCategory
+            android:key="DuskA"
+            android:title="@string/Dusk">
+
+            <EditTextPreference
+                android:key="pmazi"
+                android:title="@string/Ini"
+                android:summary="@string/IniDusk"
+                android:inputType="number"
+                android:defaultValue="22"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+
+            <EditTextPreference
+                android:key="pmaze"
+                android:title="@string/End"
+                android:summary="@string/EndDusk"
+                android:inputType="number"
+                android:defaultValue="24"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceCategory>
+        <PreferenceCategory
+            android:key="PowerB"
+            android:title="@string/Dawn">
+
+            <EditTextPreference
+                android:key="powerA"
+                android:title="@string/MaxPower"
+                android:summary="@string/LuxPower"
+                android:inputType="number"
+                android:defaultValue="60"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+
+        <PreferenceScreen
+            android:key="pref_LuxB"
+            android:title="@string/LuxB"
+            android:icon="@drawable/pmbl">
+            <PreferenceCategory
+                android:key="DawnB"
+                android:title="@string/Dawn">
+
+                <EditTextPreference
+                    android:key="ambli"
+                    android:title="@string/Ini"
+                    android:summary="@string/IniDawn"
+                    android:inputType="number"
+                    android:defaultValue="17"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <EditTextPreference
+                    android:key="amble"
+                    android:title="@string/End"
+                    android:summary="@string/EndDawn"
+                    android:inputType="number"
+                    android:defaultValue="19"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+            </PreferenceCategory>
+            <PreferenceCategory
+                android:key="DuskB"
+                android:title="@string/Dusk">
+
+                <EditTextPreference
+                    android:key="pmbli"
+                    android:title="@string/Ini"
+                    android:summary="@string/IniDusk"
+                    android:inputType="number"
+                    android:defaultValue="22"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <EditTextPreference
+                    android:key="pmble"
+                    android:title="@string/End"
+                    android:summary="@string/EndDusk"
+                    android:inputType="number"
+                    android:defaultValue="23"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+            </PreferenceCategory>
+
+            <EditTextPreference
+                android:key="powerA"
+                android:title="@string/MaxPower"
+                android:summary="@string/LuxPower"
+                android:inputType="number"
+                android:defaultValue="60"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
+        </PreferenceScreen>
+    <PreferenceScreen
+        android:key="pref_temp"
+        android:title="@string/temp"
+        android:icon="@drawable/temp">
+        <!-- Usuario de Twitter -->
+        <EditTextPreference
+            android:key="usuario_twitter"
+            android:title="@string/pref_usuario_titulo"
+            android:summary="@string/pref_usuario_resumen"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <!-- Password de Twitter -->
+        <EditTextPreference
+            android:key="contraseña_twitter"
+            android:title="@string/pref_contraseña_titulo"
+            android:summary="@string/pref_contraseña_resumen"
+            android:selectAllOnFocus="true"
+            android:inputType="textWebPassword"
+            android:singleLine="true" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:key="pref_levl"
+        android:title="@string/level"
+        android:icon="@drawable/levl">
+        <!-- Usuario de Twitter -->
+        <EditTextPreference
+            android:key="usuario_twitter"
+            android:title="@string/pref_usuario_titulo"
+            android:summary="@string/pref_usuario_resumen"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <!-- Password de Twitter -->
+        <EditTextPreference
+            android:key="contraseña_twitter"
+            android:title="@string/pref_contraseña_titulo"
+            android:summary="@string/pref_contraseña_resumen"
+            android:selectAllOnFocus="true"
+            android:inputType="textWebPassword"
+            android:singleLine="true" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:key="pref_feed"
+        android:title="@string/action_feed"
+        android:icon="@drawable/feed">
+        <!-- Usuario de Twitter -->
+        <EditTextPreference
+            android:key="usuario_twitter"
+            android:title="@string/pref_usuario_titulo"
+            android:summary="@string/pref_usuario_resumen"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <!-- Password de Twitter -->
+        <EditTextPreference
+            android:key="contraseña_twitter"
+            android:title="@string/pref_contraseña_titulo"
+            android:summary="@string/pref_contraseña_resumen"
+            android:selectAllOnFocus="true"
+            android:inputType="textWebPassword"
+            android:singleLine="true" />
+    </PreferenceScreen>
+</PreferenceScreen>
