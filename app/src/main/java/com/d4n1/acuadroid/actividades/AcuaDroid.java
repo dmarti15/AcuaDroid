@@ -138,13 +138,16 @@ public class AcuaDroid extends AppCompatActivity implements
         txStatusA.setText(String.valueOf(AcuaDroidStatus.getLuxA()));
         txStatusB.setText(String.valueOf(AcuaDroidStatus.getLuxB()));
         txTemp.setText(String.valueOf(AcuaDroidStatus.getTemp())+"º");
-        if(AcuaDroidStatus.getTemp()>sharedPref.getInt("temp_min", 0))
+        if(AcuaDroidStatus.getTemp()<Integer.valueOf(sharedPref.getString("temp_min", "0")))
         {
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorCold));
-        }else if(AcuaDroidStatus.getTemp()<sharedPref.getInt("temp_max", 0)){
+            //Log.d("AcuaDroid", "Hace frio "+AcuaDroidStatus.getTemp()+">"+sharedPref.getString("temp_min", "0"));
+        }else if(AcuaDroidStatus.getTemp()>Integer.valueOf(sharedPref.getString("temp_max", "0"))){
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorHot));
+            //Log.d("AcuaDroid", "Hace calor");
         }else {
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorWarm));
+            //Log.d("AcuaDroid", "Hace bueno");
         }
         progressBar.setProgress(ManTimer);
     };

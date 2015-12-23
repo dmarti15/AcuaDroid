@@ -102,22 +102,42 @@ public class SettingsActivity extends PreferenceActivity {
         }
         private void updatePreference(Preference preference, String key) {
             if (preference == null) return;
-            if (preference instanceof ListPreference) {
-                ListPreference listPreference = (ListPreference) preference;
-                listPreference.setSummary(listPreference.getEntry());
-                return;
-            }
+            //if (preference instanceof ListPreference) {
+            //    ListPreference listPreference = (ListPreference) preference;
+            //    listPreference.setSummary(listPreference.getEntry());
+            //    return;
+            //}
             SharedPreferences sharedPrefs = getPreferenceManager().getSharedPreferences();
             // Actualizar el resumen de la preferencia
             if (key.equals("temp_max")) {
                 //Preference preference = findPreference(key);
-                preference.setSummary(sharedPrefs.getInt(key, 27));
+                preference.setSummary("Temperatura a la que se encienden los ventiladores: "+sharedPrefs.getString(key, "27"));
             }
             if (key.equals("temp_max")) {
                 //Preference preference = findPreference(key);
-                preference.setSummary(sharedPrefs.getInt(key, 27));
+                preference.setSummary("Temperatura a la que se enciende el calentador: "+sharedPrefs.getString(key, "27"));
             }
-            preference.setSummary(sharedPrefs.getString(key, "Default"));
+            if (key.equals("feed1active")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
+            }
+            if (key.equals("feed2active")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
+            }
+            if (key.equals("feed3active")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
+            }
+            if (key.equals("feed4active")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
+            }
+            if (key.equals("feed5active")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
+            }
+            //preference.setSummary(sharedPrefs.getString(key, "Default"));
         }
     }
 }

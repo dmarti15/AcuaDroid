@@ -9,6 +9,7 @@
             android:title="@string/LevelSize"
             android:summary="@string/sumLevelSize"
             android:selectAllOnFocus="true"
+            android:inputType="number"
             android:singleLine="true" />
 
 

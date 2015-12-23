@@ -85,11 +85,11 @@
     <string name="tank">Configuración del Depósito</string>
     <string name="level">Nivel del Rellenador</string>
     <string name="LevelSize">Tamaño</string>
-    <string name="sumLevelSize">Tamaño en litros del depósito</string>
+    <string name="sumLevelSize">Tamaño en litros del depósito %s</string>
 
     <string name="ConfigAlarma">Configuración de la Alarma</string>
     <string name="LevelAlarma">Alarma</string>
-    <string name="sumLevelAlarma">Nivel de agua al que saltará la alarma</string>
+    <string name="sumLevelAlarma">Nivel de agua al que saltará la alarma %s</string>
     <string name="Litros">Litros</string>
     <string name="LitrosSign">L</string>
     <string name="Percent">Porcentaje</string>
