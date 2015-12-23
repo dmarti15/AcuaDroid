@@ -111,11 +111,11 @@ public class SettingsActivity extends PreferenceActivity {
             // Actualizar el resumen de la preferencia
             if (key.equals("temp_max")) {
                 //Preference preference = findPreference(key);
-                preference.setSummary("Temperatura a la que se encienden los ventiladores: "+sharedPrefs.getString(key, "27"));
+                preference.setSummary(sharedPrefs.getString(key, "27"));
             }
             if (key.equals("temp_max")) {
                 //Preference preference = findPreference(key);
-                preference.setSummary("Temperatura a la que se enciende el calentador: "+sharedPrefs.getString(key, "27"));
+                preference.setSummary(sharedPrefs.getString(key, "27"));
             }
             if (key.equals("feed1active")) {
                 //Preference preference = findPreference(key);

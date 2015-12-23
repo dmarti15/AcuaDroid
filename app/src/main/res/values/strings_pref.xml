@@ -57,12 +57,12 @@
     <string name="dura">Duración:</string>
     <string name="Ini">Inicio:</string>
     <string name="End">Fin:</string>
-    <string name="IniDawn">La luz empieza a encenderse a las %s </string>
-    <string name="EndDawn">La luz llega al máximo a las %s</string>
-    <string name="IniDusk">La luz empieza a apagarse a las %s</string>
-    <string name="EndDusk">La luz se apaga a las %d</string>
+    <string name="IniDawn">La luz empieza a encenderse a las "%d" </string>
+    <string name="EndDawn">La luz llega al máximo a las "%d"</string>
+    <string name="IniDusk">La luz empieza a apagarse a las "%d"</string>
+    <string name="EndDusk">La luz se apaga a las "%d"</string>
     <string name="MaxPower">Potencia</string>
-    <string name="LuxPower">Potencia máxima de las luces %d%</string>
+    <string name="LuxPower">La luz se brillará al "%d"%</string>
 
 
     <string name="PositiveButton">Aceptar</string>
@@ -74,22 +74,22 @@
     <string name="mintemphigh">30</string>
     <string name="maxtemplow">20</string>
     <string name="maxtemphigh">35</string>
-    <string name="Calentador">Tª Máxima: %dº</string>
-    <string name="Enfriador">Tª Mínima: %dº</string>
+    <string name="Calentador">A menos de "%d"º se enciende el calentador</string>
+    <string name="Enfriador">A más de "%d"º se encienden los ventiladores</string>
     <string name="grados"> º</string>
     <string name="ErrorTemp">La temperatura máxima no es mayor que la mínima</string>
-    <string name="Max">Max</string>
-    <string name="Min">Min</string>
+    <string name="Max">Tª Máxima</string>
+    <string name="Min">Tª Mínima</string>
 
 
     <string name="tank">Configuración del Depósito</string>
     <string name="level">Nivel del Rellenador</string>
     <string name="LevelSize">Tamaño</string>
-    <string name="sumLevelSize">Tamaño en litros del depósito %s</string>
+    <string name="sumLevelSize">Tamaño en litros del depósito</string>
 
     <string name="ConfigAlarma">Configuración de la Alarma</string>
     <string name="LevelAlarma">Alarma</string>
-    <string name="sumLevelAlarma">Nivel de agua al que saltará la alarma %s</string>
+    <string name="sumLevelAlarma">Nivel de agua al que saltará la alarma</string>
     <string name="Litros">Litros</string>
     <string name="LitrosSign">L</string>
     <string name="Percent">Porcentaje</string>
