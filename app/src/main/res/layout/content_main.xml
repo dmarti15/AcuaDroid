@@ -59,25 +59,9 @@
         android:layout_alignLeft="@+id/TitleStatusB"
         android:layout_alignStart="@+id/TitleStatusB" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/PercentSign"
-        android:id="@+id/txPercentA"
-        android:layout_above="@+id/TitleStatusA"
-        android:layout_toRightOf="@+id/txStatusB"
-        android:layout_toEndOf="@+id/txStatusB" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/PercentSign"
-        android:id="@+id/txPercentB"
-        android:layout_alignBottom="@+id/TitleStatusA"
-        android:layout_toRightOf="@+id/txStatusA"
-        android:layout_toEndOf="@+id/txStatusA" />
+
+
 
     <TextView
         android:layout_width="wrap_content"

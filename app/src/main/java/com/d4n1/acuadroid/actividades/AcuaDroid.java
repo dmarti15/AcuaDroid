@@ -27,7 +27,16 @@ public class AcuaDroid extends AppCompatActivity implements
         ManLuxA.LuxADialogListener, ManLuxB.LuxBDialogListener {
 
 
-    AcuaDroidStatus AcuaDroidStatus;
+    //AcuaDroidStatus AcuaDroidStatus;
+
+    //Variables de estado de Acuadroid
+    private int LuxA, LuxB, Temp, BatteryLevel;
+    static final String Status_LuxA="StatusLuxA",
+            Status_LuxB="StatusLuxB",
+            Status_Temp="StatusTemp",
+            Status_BatteryLevel="StatusBattery",
+            Status_ManTimer="StatusManTimer",
+            Status_Man="StatusMan";
 
     TextView txStatusA, txStatusB, txTemp;
     ProgressBar progressBar;
@@ -40,7 +49,6 @@ public class AcuaDroid extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        AcuaDroidStatus = new AcuaDroidStatus();
 
         isMan = false;
         ManTimer=0;
@@ -92,6 +100,33 @@ public class AcuaDroid extends AppCompatActivity implements
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save variables on screen orientation change. Save the user's current game state
+        savedInstanceState.putInt(Status_LuxA, LuxA);
+        savedInstanceState.putInt(Status_LuxB, LuxB);
+        savedInstanceState.putInt(Status_Temp, Temp);
+        savedInstanceState.putInt(Status_BatteryLevel, BatteryLevel);
+        savedInstanceState.putInt(Status_ManTimer, ManTimer);
+        savedInstanceState.putBoolean(Status_Man, isMan);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore variables on screen orientation change. Restore state members from saved instance
+        LuxA = savedInstanceState.getInt(Status_LuxA);
+        LuxB = savedInstanceState.getInt(Status_LuxB);
+        Temp = savedInstanceState.getInt(Status_Temp);
+        BatteryLevel = savedInstanceState.getInt(Status_BatteryLevel);
+        ManTimer = savedInstanceState.getInt(Status_ManTimer);
+        isMan = savedInstanceState.getBoolean(Status_Man);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -135,14 +170,14 @@ public class AcuaDroid extends AppCompatActivity implements
     }
 
     public void ResfreshScreen(){
-        txStatusA.setText(String.valueOf(AcuaDroidStatus.getLuxA()));
-        txStatusB.setText(String.valueOf(AcuaDroidStatus.getLuxB()));
-        txTemp.setText(String.valueOf(AcuaDroidStatus.getTemp())+"º");
-        if(AcuaDroidStatus.getTemp()<Integer.valueOf(sharedPref.getString("temp_min", "0")))
+        txStatusA.setText(LuxA+"%");
+        txStatusB.setText(LuxB+"%");
+        txTemp.setText(Temp+"º");
+        if(Temp<Integer.valueOf(sharedPref.getString("temp_min", "0")))
         {
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorCold));
             //Log.d("AcuaDroid", "Hace frio "+AcuaDroidStatus.getTemp()+">"+sharedPref.getString("temp_min", "0"));
-        }else if(AcuaDroidStatus.getTemp()>Integer.valueOf(sharedPref.getString("temp_max", "0"))){
+        }else if(Temp>Integer.valueOf(sharedPref.getString("temp_max", "0"))){
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorHot));
             //Log.d("AcuaDroid", "Hace calor");
         }else {
@@ -161,8 +196,8 @@ public class AcuaDroid extends AppCompatActivity implements
                 SetManOff();
             }
         }else{
-            txStatusA.setText(String.valueOf(AcuaDroidStatus.getLuxA()));
-            txStatusB.setText(String.valueOf(AcuaDroidStatus.getLuxB()));
+            txStatusA.setText(LuxA+"%");
+            txStatusB.setText(LuxB+"%");
       //      AcuaDroidStatus.setBatteryLevel(sharedPref.getInt("Temp", 0));
         }
     };
@@ -183,9 +218,6 @@ public class AcuaDroid extends AppCompatActivity implements
 
     private void RunTimeChequer(){
         Intent i = new Intent(this, TimeChecker.class);
-//        Bundle bundle = new Bundle();
-//        bundle.pu
-//        i.putExtras(AcuaDroidStatus);
         startService(i);
     }
     private void StopTimeChequer(){
@@ -197,30 +229,37 @@ public class AcuaDroid extends AppCompatActivity implements
     @Override
     public void onPossitiveLuxAButtonClick(int pow) {
         Log.d("AcuaDroid", "Modo Manual Azul MA: " + pow+ "pow ");
-        AcuaDroidStatus.setLuxA(pow);
+        LuxA=pow;
         SetManOn();
-        txStatusA.setText(String.valueOf(AcuaDroidStatus.getLuxA()));
+        txStatusA.setText(LuxA+"%");
     }
     @Override
     public void onPossitiveLuxBButtonClick(int pow) {
-        AcuaDroidStatus.setLuxB(pow);
+        LuxB=pow;
         SetManOn();
-        txStatusB.setText(String.valueOf(AcuaDroidStatus.getLuxB()));
+        txStatusB.setText(LuxB+"%");
     }
 
 
     public void SetManOn(){
-        ManTimer=sharedPref.getInt("ManTime", 60);
-        isMan=true;
-        StopTimeChequer();
-        Log.d("AcuaDroid", "Modo Manual ON");
+        if(!isMan)
+        {
+            ManTimer=sharedPref.getInt("ManTime", 60);
+            isMan=true;
+            StopTimeChequer();
+            Log.d("AcuaDroid", "Modo Manual ON");
+        }
     }
     public void SetManOff(){
-        ManTimer=0;
-        isMan=false;
-        RunTimeChequer();
-        Log.d("AcuaDroid", "Modo Manual OFF");
+        if(isMan)
+        {
+            ManTimer=0;
+            isMan=false;
+            RunTimeChequer();
+            Log.d("AcuaDroid", "Modo Manual OFF");
+        }
     }
+
 
 
 }
