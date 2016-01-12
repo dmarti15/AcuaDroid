@@ -76,8 +76,8 @@
     <string name="maxtemphigh">35</string>
     <string name="Calentador">A menos de "%d"º se enciende el calentador</string>
     <string name="Enfriador">A más de "%d"º se encienden los ventiladores</string>
-    <string name="grados"> º</string>
-    <string name="ErrorTemp">La temperatura máxima no es mayor que la mínima</string>
+    <string name="grados">º</string>
+    <string name="ErrorTemp">La temperatura máxima es menor que la mínima</string>
     <string name="Max">Tª Máxima</string>
     <string name="Min">Tª Mínima</string>
 

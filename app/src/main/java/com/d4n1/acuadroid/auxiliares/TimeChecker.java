@@ -10,6 +10,7 @@ import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +29,9 @@ public class TimeChecker extends Service {
     // timer handling
     private Timer mTimer = null;
 
+    int i=1;
+
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -41,6 +45,7 @@ public class TimeChecker extends Service {
         } else {
             // recreate new
             mTimer = new Timer();
+            Log.d("TimeChecker", "Run");
         }
         // schedule task
         mTimer.scheduleAtFixedRate(new AcuariumCheckerTimerTask(), 0, NOTIFY_INTERVAL);
@@ -80,8 +85,17 @@ public class TimeChecker extends Service {
     }
 
     private void AcuariumChecker(){
-        LuxAzulChecker();
-        LuxBlancaChecker();
+        switch (i){
+            case 1:
+                LuxAzulChecker();
+                break;
+            case 2:
+                LuxBlancaChecker();
+                break;
+            default:
+                i=0;
+        }
+        i++;
         //batteryLevel();
     };
     private void LuxAzulChecker(){
@@ -106,7 +120,9 @@ public class TimeChecker extends Service {
         }else if (pmaze<=TiempoActual){
             editor.putInt("statusA",0);
         };
-        editor.commit();
+        editor.apply();
+
+        Log.d("TimeChecker", "LuzAzul="+sharedPref.getInt("statusA",-1));
     }
 
     private void LuxBlancaChecker(){
@@ -132,7 +148,8 @@ public class TimeChecker extends Service {
         }else if (pmble<=TiempoActual){
             editor.putInt("statusB",0);
         };
-        editor.commit();
+        editor.apply();
+        Log.d("TimeChecker", "LuzBlanca="+sharedPref.getInt("statusB",-1));
     }
 
     //TODO Error al instanciar varios receiver
@@ -149,16 +166,12 @@ public class TimeChecker extends Service {
                     level = (rawlevel * 100) / scale;
                 }
                 editor.putInt("BatteryLevel", level);
-                editor.commit();
+                editor.apply();
             }
         };
         IntentFilter batteryLevelFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(batteryLevelReceiver, batteryLevelFilter);
     }
-
-
-
-
 
     int map(int x, int in_min, int in_max, int out_min, int out_max)
     {

@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.d4n1.acuadroid.R;
-import com.d4n1.acuadroid.auxiliares.AcuaDroidStatus;
 import com.d4n1.acuadroid.auxiliares.TimeChecker;
 import com.d4n1.acuadroid.dialogos.ManLuxA;
 import com.d4n1.acuadroid.dialogos.ManLuxB;
@@ -40,6 +39,8 @@ public class AcuaDroid extends AppCompatActivity implements
 
     TextView txStatusA, txStatusB, txTemp;
     ProgressBar progressBar;
+
+    Thread t;
     private boolean isMan;
     private int ManTimer;
     SharedPreferences sharedPref ;
@@ -75,9 +76,7 @@ public class AcuaDroid extends AppCompatActivity implements
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(sharedPref.getInt("ManTime", 60));
 
-        //TODO Que no salga mas de un hilo
-        Thread t = new Thread() {
-
+        t = new Thread() {
             @Override
             public void run() {
                 try {
@@ -86,17 +85,19 @@ public class AcuaDroid extends AppCompatActivity implements
                             @Override
                             public void run() {
                                 UpdateAcuaDroidStatus();
-                                ResfreshScreen();
                             }
                         });
                         Thread.sleep(1000);
                     }
                 } catch (InterruptedException e) {
+                    Log.d("AcuaDroid", "Thread Error: " + e.getMessage());
                 }
             }
         };
-
-        t.start();
+        if(!t.isAlive()){
+            Log.d("AcuaDroid", "Arranca Ticker");
+            t.start();
+        }
     }
 
     @Override
@@ -165,14 +166,13 @@ public class AcuaDroid extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-
         RunTimeChequer();
     }
 
     public void ResfreshScreen(){
-        txStatusA.setText(LuxA+"%");
-        txStatusB.setText(LuxB+"%");
-        txTemp.setText(Temp+"º");
+        txStatusA.setText(sLuxA());
+        txStatusB.setText(sLuxB());
+        txTemp.setText(sTemp());
         if(Temp<Integer.valueOf(sharedPref.getString("temp_min", "0")))
         {
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorCold));
@@ -185,7 +185,7 @@ public class AcuaDroid extends AppCompatActivity implements
             //Log.d("AcuaDroid", "Hace bueno");
         }
         progressBar.setProgress(ManTimer);
-    };
+    }
 
     public void UpdateAcuaDroidStatus(){
         if(isMan){
@@ -196,11 +196,13 @@ public class AcuaDroid extends AppCompatActivity implements
                 SetManOff();
             }
         }else{
-            txStatusA.setText(LuxA+"%");
-            txStatusB.setText(LuxB+"%");
+            LuxA=sharedPref.getInt("statusA", 0);
+            LuxB=sharedPref.getInt("statusB", 0);
       //      AcuaDroidStatus.setBatteryLevel(sharedPref.getInt("Temp", 0));
+            //Log.d("AcuaDroid", "Modo Auto");
         }
-    };
+        ResfreshScreen();
+    }
 
     @Override
     protected void onPause() {
@@ -212,6 +214,7 @@ public class AcuaDroid extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
         StopTimeChequer();
+        t.interrupt();
     }
 
 
@@ -225,19 +228,18 @@ public class AcuaDroid extends AppCompatActivity implements
     }
 
 
-    //TODO Mantener valores al girar pantalla
     @Override
     public void onPossitiveLuxAButtonClick(int pow) {
         Log.d("AcuaDroid", "Modo Manual Azul MA: " + pow+ "pow ");
         LuxA=pow;
         SetManOn();
-        txStatusA.setText(LuxA+"%");
+        txStatusA.setText(sLuxA());
     }
     @Override
     public void onPossitiveLuxBButtonClick(int pow) {
         LuxB=pow;
         SetManOn();
-        txStatusB.setText(LuxB+"%");
+        txStatusB.setText(sLuxB());
     }
 
 
@@ -258,6 +260,16 @@ public class AcuaDroid extends AppCompatActivity implements
             RunTimeChequer();
             Log.d("AcuaDroid", "Modo Manual OFF");
         }
+    }
+
+    String sLuxA(){
+        return LuxA+getString(R.string.PercentSign);
+    }
+    String sLuxB(){
+        return LuxB+getString(R.string.PercentSign);
+    }
+    String sTemp(){
+        return Temp+getString(R.string.grados);
     }
 
 
