@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/LayoutFondo">
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +71,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
         android:id="@+id/txTemp"
-        android:layout_alignBottom="@+id/txPercentA"
         android:layout_alignRight="@+id/progressBar"
         android:layout_alignEnd="@+id/progressBar" />
 

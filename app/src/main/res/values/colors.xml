@@ -8,4 +8,11 @@
     <color name="colorCold">#00e5ff</color>
     <color name="colorWarm">#00c853</color>
     <color name="colorHot">#f44336</color>
+    <color name="cNoche">#020161</color>
+    <color name="cDia">#00b1f7</color>
+    <color name="cAmanecer">#ffc85a</color>
+    <color name="cAnochecer">#614ef1</color>
+    <color name="LuxA">#0000ff</color>
+    <color name="LuxB">#efd406</color>
+    <color name="cError">#f44336</color>
 </resources>

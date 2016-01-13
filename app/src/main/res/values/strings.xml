@@ -11,6 +11,12 @@
     <string name="LuxB">Luz Blanca</string>
     <string name="LuxA">Luz Azul</string>
 
+    <string name="FaseX">Error, Fase no reconocida</string>
+    <string name="Fase0">Noche</string>
+    <string name="Fase1">Amanecer</string>
+    <string name="Fase2">Día</string>
+    <string name="Fase3">Anochecer</string>
+
 
 
 

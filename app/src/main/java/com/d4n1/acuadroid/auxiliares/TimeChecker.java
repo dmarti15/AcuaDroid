@@ -111,14 +111,19 @@ public class TimeChecker extends Service {
 
         if(amazi>TiempoActual){
             editor.putInt("statusA",0);
+            editor.putInt("FaseA", 0);
         }else if (amazi<=TiempoActual && amaze>TiempoActual){
             editor.putInt("statusA",map(TiempoActual,amazi,amaze,0,powerA));
+            editor.putInt("FaseA", 1);
         }else if (amaze<=TiempoActual && pmazi>TiempoActual){
             editor.putInt("statusA",powerA);
+            editor.putInt("FaseA", 2);
         }else if (pmazi<=TiempoActual && pmaze>TiempoActual){
             editor.putInt("statusA",map(TiempoActual,amazi,amaze,0,powerA));
+            editor.putInt("FaseA", 3);
         }else if (pmaze<=TiempoActual){
             editor.putInt("statusA",0);
+            editor.putInt("FaseA", 0);
         };
         editor.apply();
 
@@ -137,16 +142,20 @@ public class TimeChecker extends Service {
 
 
         if(ambli>TiempoActual){
-
             editor.putInt("statusB", 0);
+            editor.putInt("FaseB", 0);
         }else if (ambli<=TiempoActual && amble>TiempoActual){
             editor.putInt("statusB",map(TiempoActual,ambli,amble,0,powerB));
+            editor.putInt("FaseB", 1);
         }else if (amble<=TiempoActual && pmbli>TiempoActual){
             editor.putInt("statusB",powerB);
+            editor.putInt("FaseB", 2);
         }else if (pmbli<=TiempoActual && pmble>TiempoActual){
             editor.putInt("statusB",map(TiempoActual,ambli,amble,0,powerB));
+            editor.putInt("FaseB", 3);
         }else if (pmble<=TiempoActual){
             editor.putInt("statusB",0);
+            editor.putInt("FaseB", 0);
         };
         editor.apply();
         Log.d("TimeChecker", "LuzBlanca="+sharedPref.getInt("statusB",-1));

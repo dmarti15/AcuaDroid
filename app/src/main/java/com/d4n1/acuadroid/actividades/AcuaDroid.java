@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.d4n1.acuadroid.R;
@@ -39,6 +40,8 @@ public class AcuaDroid extends AppCompatActivity implements
 
     TextView txStatusA, txStatusB, txTemp;
     ProgressBar progressBar;
+    RelativeLayout RelLay;
+    String Fase;
 
     Thread t;
     private boolean isMan;
@@ -70,8 +73,13 @@ public class AcuaDroid extends AppCompatActivity implements
             }
         });
 
+        RelLay = (RelativeLayout) findViewById(R.id.LayoutFondo);
+
+
         txStatusA = (TextView) findViewById(R.id.txStatusA);
+        txStatusA.setTextColor(getResources().getColor(R.color.LuxA));
         txStatusB = (TextView) findViewById(R.id.txStatusB);
+        txStatusB.setTextColor(getResources().getColor(R.color.LuxB));
         txTemp = (TextView) findViewById(R.id.txTemp);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(sharedPref.getInt("ManTime", 60));
@@ -173,6 +181,37 @@ public class AcuaDroid extends AppCompatActivity implements
         txStatusA.setText(sLuxA());
         txStatusB.setText(sLuxB());
         txTemp.setText(sTemp());
+        int fA=sharedPref.getInt("FaseA", -1);
+        int fB=sharedPref.getInt("FaseB", -1);
+        int fX=-1;
+        if(fA==2 && fB==2) fX=2;
+        else if (fA==1 || fB==1) fX=1;
+        else if (fA==3 || fB==3) fX=3;
+        else if (fA==0 && fB==0) fX=0;
+
+        switch (fX){
+            case 0:
+                RelLay.setBackgroundColor(getResources().getColor(R.color.cNoche));
+                Fase=getResources().getString(R.string.Fase0);
+                break;
+            case 1:
+                RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
+                Fase=getResources().getString(R.string.Fase1);
+                break;
+            case 2:
+                RelLay.setBackgroundColor(getResources().getColor(R.color.cDia));
+                Fase=getResources().getString(R.string.Fase2);
+                break;
+            case 3:
+                RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
+                Fase=getResources().getString(R.string.Fase3);
+                break;
+            default:
+                RelLay.setBackgroundColor(getResources().getColor(R.color.cError));
+                Fase=getResources().getString(R.string.FaseX);
+                Log.d("AcuaDroid", Fase+":"+fX);
+                break;
+        }
         if(Temp<Integer.valueOf(sharedPref.getString("temp_min", "0")))
         {
             txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorCold));
