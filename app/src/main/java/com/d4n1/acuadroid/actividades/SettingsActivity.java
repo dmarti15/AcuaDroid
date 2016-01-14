@@ -2,21 +2,16 @@ package com.d4n1.acuadroid.actividades;
 
 
 import android.annotation.TargetApi;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import com.d4n1.acuadroid.R;
-import com.d4n1.acuadroid.fragments.SettingsFragment;
 
 import java.util.List;
 
@@ -64,6 +59,8 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_feed);
             } else if ("twitter".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_twitter);
+            }else if ("otros".equals(settings)) {
+                addPreferencesFromResource(R.xml.settings_otros);
             }
             //getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
@@ -113,9 +110,57 @@ public class SettingsActivity extends PreferenceActivity {
                 //Preference preference = findPreference(key);
                 preference.setSummary(sharedPrefs.getString(key, "27"));
             }
-            if (key.equals("temp_max")) {
+            if (key.equals("temp_min")) {
                 //Preference preference = findPreference(key);
-                preference.setSummary(sharedPrefs.getString(key, "27"));
+                preference.setSummary(sharedPrefs.getString(key, "22"));
+            }
+            if (key.equals("amazi")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "15"));
+            }
+            if (key.equals("amaze")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "17"));
+            }
+            if (key.equals("pmazi")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "22"));
+            }
+            if (key.equals("pmaze")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "24"));
+            }
+            if (key.equals("powerA")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "75"));
+            }
+            if (key.equals("ambli")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "16"));
+            }
+            if (key.equals("amble")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "18"));
+            }
+            if (key.equals("pmbli")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "21"));
+            }
+            if (key.equals("pmble")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "23"));
+            }
+            if (key.equals("powerB")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "75"));
+            }
+            if (key.equals("levl_size")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "23"));
+            }
+            if (key.equals("LevlAlarm")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "15"));
             }
             if (key.equals("feed1active")) {
                 //Preference preference = findPreference(key);
@@ -137,7 +182,58 @@ public class SettingsActivity extends PreferenceActivity {
                 //Preference preference = findPreference(key);
                 preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
             }
-            //preference.setSummary(sharedPrefs.getString(key, "Default"));
+            if (key.equals("feed1hora")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "14"));
+            }
+            if (key.equals("feed2hora")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "16"));
+            }
+            if (key.equals("feed3hora")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "18"));
+            }
+            if (key.equals("feed4hora")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "20"));
+            }
+            if (key.equals("feed5hora")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "22"));
+            }
+            if (key.equals("feed1vueltas")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "1"));
+            }
+            if (key.equals("feed2vueltas")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "1"));
+            }
+            if (key.equals("feed3vueltas")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "1"));
+            }
+            if (key.equals("feed4vueltas")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "1"));
+            }
+            if (key.equals("feed5vueltas")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "1"));
+            }
+            if (key.equals("usuario_twitter")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "Introduce tu usuario de Twitter"));
+            }
+            if (key.equals("contraseña_twitter")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "********"));
+            }
+            if (key.equals("TiempoManual")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "10"));
+            }
         }
     }
 }

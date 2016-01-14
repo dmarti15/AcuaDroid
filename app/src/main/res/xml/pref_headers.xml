@@ -57,4 +57,13 @@
 
         <extra android:name="settings" android:value="twitter" />
     </header>
+
+    <header
+        android:fragment="com.d4n1.acuadroid.actividades.SettingsActivity$SettingsFragment"
+        android:title="@string/pref_otros"
+        android:summary="@string/otrosSumary"
+        android:icon="@drawable/icon_settings">
+
+        <extra android:name="settings" android:value="otros" />
+    </header>
 </preference-headers>

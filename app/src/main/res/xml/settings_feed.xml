@@ -6,18 +6,19 @@
         android:title="@string/feed1">
         <CheckBoxPreference
             android:key="feed1active"
-            android:title="@string/pref_miniaturas"
+            android:title="@string/feedActive"
+            android:summary="@string/sumfeedActive"
             android:defaultValue="true" />
         <EditTextPreference
+            android:dependency="feed1active"
             android:key="feed1hora"
             android:title="@string/feedHora"
             android:summary="@string/sumfeedHora"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
-
-        <!-- Password de Twitter -->
         <EditTextPreference
+            android:dependency="feed1active"
             android:key="feed1vueltas"
             android:title="@string/feedVueltas"
             android:summary="@string/sumfeedVueltas"
@@ -31,18 +32,19 @@
         android:title="@string/feed2">
         <CheckBoxPreference
             android:key="feed2active"
-            android:title="@string/pref_miniaturas"
-            android:defaultValue="true" />
+            android:title="@string/feedActive"
+            android:summary="@string/sumfeedActive"
+            android:defaultValue="false" />
         <EditTextPreference
+            android:dependency="feed2active"
             android:key="feed2hora"
             android:title="@string/feedHora"
             android:summary="@string/sumfeedHora"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
-
-        <!-- Password de Twitter -->
         <EditTextPreference
+            android:dependency="feed2active"
             android:key="feed2vueltas"
             android:title="@string/feedVueltas"
             android:summary="@string/sumfeedVueltas"
@@ -56,18 +58,19 @@
         android:title="@string/feed3">
         <CheckBoxPreference
             android:key="feed3active"
-            android:title="@string/pref_miniaturas"
-            android:defaultValue="true" />
+            android:title="@string/feedActive"
+            android:summary="@string/sumfeedActive"
+            android:defaultValue="false" />
         <EditTextPreference
+            android:dependency="feed3active"
             android:key="feed3hora"
             android:title="@string/feedHora"
             android:summary="@string/sumfeedHora"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
-
-        <!-- Password de Twitter -->
         <EditTextPreference
+            android:dependency="feed3active"
             android:key="feed3vueltas"
             android:title="@string/feedVueltas"
             android:summary="@string/sumfeedVueltas"
@@ -81,18 +84,19 @@
         android:title="@string/feed4">
         <CheckBoxPreference
             android:key="feed4active"
-            android:title="@string/pref_miniaturas"
-            android:defaultValue="true" />
+            android:title="@string/feedActive"
+            android:summary="@string/sumfeedActive"
+            android:defaultValue="false" />
         <EditTextPreference
+            android:dependency="feed4active"
             android:key="feed4hora"
             android:title="@string/feedHora"
             android:summary="@string/sumfeedHora"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
-
-        <!-- Password de Twitter -->
         <EditTextPreference
+            android:dependency="feed4active"
             android:key="feed4vueltas"
             android:title="@string/feedVueltas"
             android:summary="@string/sumfeedVueltas"
@@ -106,18 +110,19 @@
         android:title="@string/feed5">
         <CheckBoxPreference
             android:key="feed5active"
-            android:title="@string/pref_miniaturas"
-            android:defaultValue="true" />
+            android:title="@string/feedActive"
+            android:summary="@string/sumfeedActive"
+            android:defaultValue="false" />
         <EditTextPreference
+            android:dependency="feed5active"
             android:key="feed5hora"
             android:title="@string/feedHora"
             android:summary="@string/sumfeedHora"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
-
-        <!-- Password de Twitter -->
         <EditTextPreference
+            android:dependency="feed5active"
             android:key="feed5vueltas"
             android:title="@string/feedVueltas"
             android:summary="@string/sumfeedVueltas"

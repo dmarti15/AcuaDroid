@@ -15,4 +15,5 @@
     <color name="LuxA">#0000ff</color>
     <color name="LuxB">#efd406</color>
     <color name="cError">#f44336</color>
+    <color name="MainFont">#f0fffd</color>
 </resources>

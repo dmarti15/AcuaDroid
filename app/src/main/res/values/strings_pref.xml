@@ -19,26 +19,6 @@
     <string name="sum_feed">Configuración del alimentador automático</string>
     <string name="sum_twitter">Configuración de Twitter</string>
 
-    <!-- GENERALES -->
-    <!-- Preferencia Miniaturas -->
-    <string name="pref_miniaturas">Mostrar Miniaturas</string>
-
-    <!-- Preferencia Número de Articulos -->
-    <string name="pref_numArticulos_titulo">Número de Artículos</string>
-    <string-array name="pref_numArticulos_entradas">
-        <item>6</item>
-        <item>8</item>
-        <item>12</item>
-        <item>16</item>
-    </string-array>
-    <string-array name="pref_numArticulos_valores">
-        <item>6</item>
-        <item>8</item>
-        <item>12</item>
-        <item>16</item>
-    </string-array>
-    <string name="pref_numArticulos_resumen">Número máximo de artículos en la lista</string>
-
     <!-- Preferencias Cuenta Twitter -->
     <string name="pref_usuario_titulo">Usuario</string>
     <string name="pref_usuario_resumen">Tu nombre de usuario en Twitter</string>
@@ -57,12 +37,12 @@
     <string name="dura">Duración:</string>
     <string name="Ini">Inicio:</string>
     <string name="End">Fin:</string>
-    <string name="IniDawn">La luz empieza a encenderse a las "%d" </string>
-    <string name="EndDawn">La luz llega al máximo a las "%d"</string>
-    <string name="IniDusk">La luz empieza a apagarse a las "%d"</string>
-    <string name="EndDusk">La luz se apaga a las "%d"</string>
+    <string name="IniDawn">La luz empieza a encenderse a las %d</string>
+    <string name="EndDawn">La luz llega al máximo a las %d</string>
+    <string name="IniDusk">La luz empieza a apagarse a las %d</string>
+    <string name="EndDusk">La luz se apaga a las %d</string>
     <string name="MaxPower">Potencia</string>
-    <string name="LuxPower">La luz se brillará al "%d"%</string>
+    <string name="LuxPower">La luz se brillará al %d %</string>
 
 
     <string name="PositiveButton">Aceptar</string>
@@ -74,8 +54,8 @@
     <string name="mintemphigh">30</string>
     <string name="maxtemplow">20</string>
     <string name="maxtemphigh">35</string>
-    <string name="Calentador">A menos de "%d"º se enciende el calentador</string>
-    <string name="Enfriador">A más de "%d"º se encienden los ventiladores</string>
+    <string name="Calentador">A menos de %d º se enciende el calentador</string>
+    <string name="Enfriador">A más de %d º se encienden los ventiladores</string>
     <string name="grados">º</string>
     <string name="ErrorTemp">La temperatura máxima es menor que la mínima</string>
     <string name="Max">Tª Máxima</string>
@@ -85,11 +65,11 @@
     <string name="tank">Configuración del Depósito</string>
     <string name="level">Nivel del Rellenador</string>
     <string name="LevelSize">Tamaño</string>
-    <string name="sumLevelSize">Tamaño en litros del depósito</string>
+    <string name="sumLevelSize">Tamaño depósito %d Litros</string>
 
     <string name="ConfigAlarma">Configuración de la Alarma</string>
     <string name="LevelAlarma">Alarma</string>
-    <string name="sumLevelAlarma">Nivel de agua al que saltará la alarma</string>
+    <string name="sumLevelAlarma">La alarma saltará si el nivel baja del %d %</string>
     <string name="Litros">Litros</string>
     <string name="LitrosSign">L</string>
     <string name="Percent">Porcentaje</string>
@@ -99,14 +79,21 @@
     <string name="feedActive">Activo</string>
     <string name="sumfeedActive">Activa para alimentar</string>
     <string name="feedHora">Hora</string>
-    <string name="sumfeedHora">Hora de comer</string>
+    <string name="sumfeedHora">Hora de comer: %d</string>
     <string name="feedVueltas">Vueltas</string>
-    <string name="sumfeedVueltas">Nº de vueltas que dará el alimentador</string>
+    <string name="sumfeedVueltas">El alimentador dará %d vueltas.</string>
     <string name="feed1">1ª Comida</string>
     <string name="feed2">2ª Comida</string>
     <string name="feed3">3ª Comida</string>
     <string name="feed4">4ª Comida</string>
     <string name="feed5">5ª Comida</string>
+
+<!--- OTROS AJUSTES -->
+    <string name="pref_otros">Otros</string>
+    <string name="otrosSumary">Ajustes Variados</string>
+    <string name="TiempoManual">Modo </string>
+    <string name="TiempoManualSum">Minutos que dura el modo manual</string>
+
 
 
 

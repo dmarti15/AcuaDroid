@@ -50,7 +50,7 @@
     </PreferenceCategory>
 
     <EditTextPreference
-        android:key="powerA"
+        android:key="powerB"
         android:title="@string/MaxPower"
         android:summary="@string/LuxPower"
         android:inputType="number"

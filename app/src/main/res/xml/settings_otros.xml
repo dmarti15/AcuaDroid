@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="pref_otros"
+    android:title="@string/pref_otros"
+    android:icon="@drawable/icon_settings">
+
+     <PreferenceCategory
+         android:key="ManMode"
+         android:title="@string/pref_otros">
+         <EditTextPreference
+             android:key="TiempoManual"
+             android:title="@string/TiempoManualSum"
+             android:summary=""
+             android:inputType="number"
+             android:defaultValue="10"
+             android:selectAllOnFocus="true"
+             android:singleLine="true" />
+     </PreferenceCategory>
+</PreferenceScreen>

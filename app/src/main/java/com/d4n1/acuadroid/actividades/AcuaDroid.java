@@ -2,6 +2,7 @@ package com.d4n1.acuadroid.actividades;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -41,6 +42,7 @@ public class AcuaDroid extends AppCompatActivity implements
     TextView txStatusA, txStatusB, txTemp;
     ProgressBar progressBar;
     RelativeLayout RelLay;
+    int orientation;
     String Fase;
 
     Thread t;
@@ -62,7 +64,7 @@ public class AcuaDroid extends AppCompatActivity implements
 
         // Procesar valores actuales de las preferencias.
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);// Cargar valores por defecto
-        //PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        //PreferenceManager.setDefaultValues(this, R.xml.settings_otros, false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +76,7 @@ public class AcuaDroid extends AppCompatActivity implements
         });
 
         RelLay = (RelativeLayout) findViewById(R.id.LayoutFondo);
+        orientation = getResources().getConfiguration().orientation;
 
 
         txStatusA = (TextView) findViewById(R.id.txStatusA);
@@ -82,7 +85,7 @@ public class AcuaDroid extends AppCompatActivity implements
         txStatusB.setTextColor(getResources().getColor(R.color.LuxB));
         txTemp = (TextView) findViewById(R.id.txTemp);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.setMax(sharedPref.getInt("ManTime", 60));
+        progressBar.setMax(Integer.valueOf(sharedPref.getString("TiempoManual", "10"))*60);
 
         t = new Thread() {
             @Override
@@ -185,25 +188,41 @@ public class AcuaDroid extends AppCompatActivity implements
         int fB=sharedPref.getInt("FaseB", -1);
         int fX=-1;
         if(fA==2 && fB==2) fX=2;
-        else if (fA==1 || fB==1) fX=1;
-        else if (fA==3 || fB==3) fX=3;
+        else if (fA==1 || fB==1 || fA==2) fX=1;
+        else if (fA==3 || fB==3 || fB==2) fX=3;
         else if (fA==0 && fB==0) fX=0;
 
         switch (fX){
             case 0:
-                RelLay.setBackgroundColor(getResources().getColor(R.color.cNoche));
+                if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    RelLay.setBackgroundResource (R.drawable.noche);
+                } else {
+                    RelLay.setBackgroundColor(getResources().getColor(R.color.cNoche));
+                }
                 Fase=getResources().getString(R.string.Fase0);
                 break;
             case 1:
-                RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
+                if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    RelLay.setBackgroundResource (R.drawable.amanecer);
+                } else {
+                    RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
+                }
                 Fase=getResources().getString(R.string.Fase1);
                 break;
             case 2:
-                RelLay.setBackgroundColor(getResources().getColor(R.color.cDia));
+                if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    RelLay.setBackgroundResource (R.drawable.dia);
+                } else {
+                    RelLay.setBackgroundColor(getResources().getColor(R.color.cDia));
+                }
                 Fase=getResources().getString(R.string.Fase2);
                 break;
             case 3:
-                RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
+                if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    RelLay.setBackgroundResource (R.drawable.amanecer);
+                } else {
+                    RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
+                }
                 Fase=getResources().getString(R.string.Fase3);
                 break;
             default:
@@ -285,7 +304,7 @@ public class AcuaDroid extends AppCompatActivity implements
     public void SetManOn(){
         if(!isMan)
         {
-            ManTimer=sharedPref.getInt("ManTime", 60);
+            ManTimer=Integer.valueOf(sharedPref.getString("TiempoManual", "10"))*60;
             isMan=true;
             StopTimeChequer();
             Log.d("AcuaDroid", "Modo Manual ON");
