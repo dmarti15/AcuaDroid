@@ -91,8 +91,13 @@
 <!--- OTROS AJUSTES -->
     <string name="pref_otros">Otros</string>
     <string name="otrosSumary">Ajustes Variados</string>
+
     <string name="TiempoManual">Modo </string>
     <string name="TiempoManualSum">Minutos que dura el modo manual</string>
+
+
+    <string name="Bateria">Batería</string>
+    <string name="BateriaSum">Activar el cargador si la bateria baja del</string>
 
 
 

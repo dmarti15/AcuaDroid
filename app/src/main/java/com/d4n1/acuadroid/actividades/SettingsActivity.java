@@ -234,6 +234,10 @@ public class SettingsActivity extends PreferenceActivity {
                 //Preference preference = findPreference(key);
                 preference.setSummary(sharedPrefs.getString(key, "10"));
             }
+            if (key.equals("BatteryMin")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, "10"));
+            }
         }
     }
 }

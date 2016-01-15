@@ -15,4 +15,17 @@
              android:selectAllOnFocus="true"
              android:singleLine="true" />
      </PreferenceCategory>
+
+    <PreferenceCategory
+    android:key="Battery"
+    android:title="@string/Bateria">
+    <EditTextPreference
+        android:key="BatteryMin"
+        android:title="@string/BateriaSum"
+        android:summary=""
+        android:inputType="number"
+        android:defaultValue="10"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+</PreferenceCategory>
 </PreferenceScreen>
