@@ -1,6 +1,5 @@
 package com.d4n1.acuadroid.actividades;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -22,13 +21,8 @@ import android.widget.TextView;
 
 import com.d4n1.acuadroid.R;
 import com.d4n1.acuadroid.auxiliares.TimeChecker;
-import com.d4n1.acuadroid.auxiliares.TweetHelper;
-import com.d4n1.acuadroid.auxiliares.TwitterWebActivity;
-import com.d4n1.acuadroid.auxiliares.Twitter_Statics;
 import com.d4n1.acuadroid.dialogos.ManLuxA;
 import com.d4n1.acuadroid.dialogos.ManLuxB;
-
-import twitter4j.auth.RequestToken;
 
 public class AcuaDroid extends AppCompatActivity implements
         ManLuxA.LuxADialogListener, ManLuxB.LuxBDialogListener {
@@ -57,11 +51,7 @@ public class AcuaDroid extends AppCompatActivity implements
     SharedPreferences sharedPref;
 
 
-    Twitter_Statics ts = new Twitter_Statics();
-    private RequestToken mRequestToken = null;
 
-    private TweetHelper tweet_hlp;
-    private int TWITTER_AUTH=1;
 
 
 
@@ -75,11 +65,7 @@ public class AcuaDroid extends AppCompatActivity implements
         ManTimer = 0;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Creo instancia a clase para interactuar con twitter.
-        tweet_hlp = new TweetHelper(this);
-        //Verificamos que halla alguna key guardada en el telefono si no
-        //llamamos a un webview para obtenerlas
-        validar_login();
+
 
         setSupportActionBar(toolbar);
 
@@ -92,21 +78,6 @@ public class AcuaDroid extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 try {
-                    //validamos login de nuevo
-                    validar_login();
-                    // obtenemos texto de componente de texto
-                    String texto = "Tweet de prueba de la nieva version de AcuadRoid";
-                    // enviamos tweet y obtenemos estado de envio
-                    boolean twt_snd_status = tweet_hlp.Send_Tweet(texto);
-                    if (twt_snd_status)// OK enviado
-                    { // cambiamos imagen de estad a twitter_OK
-                        Snackbar.make(view, "Tu tweet ha sido enviado", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
-                    } else {
-                        // cambiamos imagen de estad a twitter_fial
-                        Snackbar.make(view, "Hubo un Error no se pudo eviar tu tweet.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
-                    }
 
                     Snackbar.make(view, R.string.txt_FloatingButton, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
@@ -372,29 +343,5 @@ public class AcuaDroid extends AppCompatActivity implements
         return Temp + getString(R.string.grados);
     }
 
-    public void validar_login(){
-        //Verificar si existen claves alamacenadas en el telefono si no llamar al webview.
-        if(!tweet_hlp.verify_logindata())
-        {
-            //Show_Toast("No se han encontrado claves en el telefono las descargaremos.");
-            //creamos intent y pasamos get_AuthenticationURL
-            Intent i = new Intent(AcuaDroid.this, TwitterWebActivity.class);
-            i.putExtra("URL", tweet_hlp.get_AuthenticationURL());
-            startActivityForResult(i, TWITTER_AUTH);
 
-        }
-    }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //si el codigo obtenido es ok
-        if (resultCode == Activity.RESULT_OK) {
-            // Obtenemos oauth_verifier pasado por el webview
-            String oauthVerifier = (String) data.getExtras().get("oauth_verifier");
-            Log.e("oauthVerifier ->", oauthVerifier);
-
-            // Grabamos el valor de oauthVerifier en el shared preferences
-            tweet_hlp.Store_OAuth_verifier(oauthVerifier);
-
-        }
-
-    }
 }

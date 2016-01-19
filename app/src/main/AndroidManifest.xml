@@ -27,7 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".actividades.AcuaDroid" />
         </activity>
-        <activity   android:name=".auxiliares.TwitterWebActivity"/>
+
         <service android:name=".auxiliares.TimeChecker"/>
 
 
