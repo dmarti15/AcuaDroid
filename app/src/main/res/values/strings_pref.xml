@@ -20,11 +20,9 @@
     <string name="sum_twitter">Configuración de Twitter</string>
 
     <!-- Preferencias Cuenta Twitter -->
-    <string name="pref_usuario_titulo">Usuario</string>
-    <string name="pref_usuario_resumen">Tu nombre de usuario en Twitter</string>
-
-    <string name="pref_contraseña_titulo">Contraseña</string>
-    <string name="pref_contraseña_resumen">Tu Contraseña de Twitter</string>
+    <string name="pref_desc_twitter">Envío automático del estado por Twitter</string>
+    <string name="pref_twitter_ON">Activo</string>
+    <string name="pref_twitter_OFF">Apagado</string>
 
 
     <string name="LigthCFG">Configuracion de Luces</string>

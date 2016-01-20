@@ -18,14 +18,40 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.d4n1.acuadroid.R;
 import com.d4n1.acuadroid.auxiliares.TimeChecker;
 import com.d4n1.acuadroid.dialogos.ManLuxA;
 import com.d4n1.acuadroid.dialogos.ManLuxB;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.services.StatusesService;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import io.fabric.sdk.android.Fabric;
 
 public class AcuaDroid extends AppCompatActivity implements
         ManLuxA.LuxADialogListener, ManLuxB.LuxBDialogListener {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "uv1RAdGZFDFtfzNn7C75g";
+    private static final String TWITTER_SECRET = "X9XZ6fC3RY7yBeCkDiMZBrXTf1ytuYQLR0jAC6e0kQ4";
+    private TwitterLoginButton loginButton;
+    private Boolean isTwitterLoggedIn=false;
+    private TwitterSession session;
+
+
+
+
 
 
     //AcuaDroidStatus AcuaDroidStatus;
@@ -58,6 +84,9 @@ public class AcuaDroid extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
+        Fabric.with(this, new TwitterCore(authConfig), new TweetComposer());
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -78,7 +107,7 @@ public class AcuaDroid extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 try {
-
+                    Tweet();
                     Snackbar.make(view, R.string.txt_FloatingButton, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 } catch (Exception e) {
@@ -122,7 +151,60 @@ public class AcuaDroid extends AppCompatActivity implements
             Log.d("AcuaDroid", "Arranca Ticker");
             t.start();
         }
+
+        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+        if(sharedPref.getBoolean("usar_twitter", false) && !isTwitterLoggedIn){
+            loginButton.setVisibility(View.VISIBLE);
+        }else{
+            loginButton.setVisibility(View.INVISIBLE);
+        }
+
+        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+        loginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // The TwitterSession is also available through:
+                // Twitter.getInstance().core.getSessionManager().getActiveSession()
+                session = result.data;
+                // TODO: Remove toast and use the TwitterSession's userID
+                // with your app's user model
+                isTwitterLoggedIn=true;
+                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void failure(TwitterException exception) {
+                Log.d("TwitterKit", "Login with Twitter failure", exception);
+            }
+        });
+
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Make sure that the loginButton hears the result from any
+        // Activity that it triggered.
+        loginButton.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void Tweet(){
+        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient(session);
+        StatusesService statusesService = twitterApiClient.getStatusesService();
+        statusesService.update("Vale,pues ya se twitear :)", null, false, null, null,
+                null, null, null, new Callback<Tweet>() {
+                    @Override
+                    public void success(Result<Tweet> result) {
+                        //Do something with result, which provides a Tweet inside of result.data
+                        Log.d("TwitterKit", "Tweet enviado");
+                    }
+
+                    public void failure(TwitterException exception) {
+                        //Do something on failure
+                        Log.e("TwitterKit", "Tweet NO enviado, estas loggeado?");
+                    }
+                });
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -190,6 +272,11 @@ public class AcuaDroid extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         RunTimeChequer();
+        if(sharedPref.getBoolean("usar_twitter", false) && !isTwitterLoggedIn){
+            loginButton.setVisibility(View.VISIBLE);
+        }else{
+            loginButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void ResfreshScreen() {

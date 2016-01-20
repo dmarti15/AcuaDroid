@@ -59,7 +59,7 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_feed);
             } else if ("twitter".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_twitter);
-            }else if ("otros".equals(settings)) {
+            } else if ("otros".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_otros);
             }
             //getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
@@ -222,13 +222,17 @@ public class SettingsActivity extends PreferenceActivity {
                 //Preference preference = findPreference(key);
                 preference.setSummary(sharedPrefs.getString(key, "1"));
             }
-            if (key.equals("usuario_twitter")) {
+            //if (key.equals("usuario_twitter")) {
+            //    //Preference preference = findPreference(key);
+            //    preference.setSummary(sharedPrefs.getString(key, "Introduce tu usuario de Twitter"));
+            //}
+            //if (key.equals("contraseña_twitter")) {
+            //    //Preference preference = findPreference(key);
+            //    preference.setSummary(sharedPrefs.getString(key, "********"));
+            //}
+            if (key.equals("usar_twitter")) {
                 //Preference preference = findPreference(key);
-                preference.setSummary(sharedPrefs.getString(key, "Introduce tu usuario de Twitter"));
-            }
-            if (key.equals("contraseña_twitter")) {
-                //Preference preference = findPreference(key);
-                preference.setSummary(sharedPrefs.getString(key, "********"));
+                preference.setSummary(String.valueOf(sharedPrefs.getBoolean(key, false)));
             }
             if (key.equals("TiempoManual")) {
                 //Preference preference = findPreference(key);

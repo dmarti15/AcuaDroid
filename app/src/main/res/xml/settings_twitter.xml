@@ -5,20 +5,10 @@
         android:key="pref_twitter"
         android:title="@string/pref_twitter">
         <!-- Usuario de Twitter -->
-        <EditTextPreference
-            android:key="usuario_twitter"
-            android:title="@string/pref_usuario_titulo"
-            android:summary="@string/pref_usuario_resumen"
-            android:selectAllOnFocus="true"
-            android:singleLine="true" />
-
-        <!-- Password de Twitter -->
-        <EditTextPreference
-            android:key="contraseña_twitter"
-            android:title="@string/pref_contraseña_titulo"
-            android:summary="@string/pref_contraseña_resumen"
-            android:selectAllOnFocus="true"
-            android:inputType="textWebPassword"
-            android:singleLine="true" />
+        <CheckBoxPreference
+            android:key="usar_twitter"
+            android:title="@string/pref_desc_twitter"
+            android:summary="@string/pref_twitter_OFF"
+            android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>

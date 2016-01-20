@@ -31,6 +31,9 @@
         <service android:name=".auxiliares.TimeChecker"/>
 
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="12ed5102485c32d2a14fc35471ac0cfb4af8639b" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
