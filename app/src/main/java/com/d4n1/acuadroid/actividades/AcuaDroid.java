@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.d4n1.acuadroid.R;
 import com.d4n1.acuadroid.auxiliares.TimeChecker;
@@ -35,7 +34,6 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.StatusesService;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -43,8 +41,11 @@ public class AcuaDroid extends AppCompatActivity implements
         ManLuxA.LuxADialogListener, ManLuxB.LuxBDialogListener {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "uv1RAdGZFDFtfzNn7C75g";
-    private static final String TWITTER_SECRET = "X9XZ6fC3RY7yBeCkDiMZBrXTf1ytuYQLR0jAC6e0kQ4";
+    //private static final String TWITTER_KEY = "IOeAvbTyModB6Vg2RmxaD3r3K";
+    //private static final String TWITTER_SECRET = "O15G4qgDKTIWInPuzXdGFQ4VYCC3SbDBGi2M9guJMEwnWaXtuK";
+
+    private static final String TWITTER_KEY = "5u1x09N5I6JECefgQhh7XEPzP";
+    private static final String TWITTER_SECRET = "BKXwGZo3u8PADnn7rBMwNnSTzM3cXr3nkmQtudUm3vyqrEydfE";
     private TwitterLoginButton loginButton;
     private Boolean isTwitterLoggedIn=false;
     private TwitterSession session;
@@ -63,7 +64,8 @@ public class AcuaDroid extends AppCompatActivity implements
             Status_Temp = "StatusTemp",
             Status_BatteryLevel = "StatusBattery",
             Status_ManTimer = "StatusManTimer",
-            Status_Man = "StatusMan";
+            Status_Man = "StatusMan",
+            Status_twitter = "Status_twitter";
 
     TextView txStatusA, txStatusB, txTemp;
     ProgressBar progressBar;
@@ -86,7 +88,6 @@ public class AcuaDroid extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
-        Fabric.with(this, new TwitterCore(authConfig), new TweetComposer());
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -152,31 +153,6 @@ public class AcuaDroid extends AppCompatActivity implements
             t.start();
         }
 
-        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
-        if(sharedPref.getBoolean("usar_twitter", false) && !isTwitterLoggedIn){
-            loginButton.setVisibility(View.VISIBLE);
-        }else{
-            loginButton.setVisibility(View.INVISIBLE);
-        }
-
-        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
-        loginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
-                session = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
-                // with your app's user model
-                isTwitterLoggedIn=true;
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-            }
-            @Override
-            public void failure(TwitterException exception) {
-                Log.d("TwitterKit", "Login with Twitter failure", exception);
-            }
-        });
 
     }
     @Override
@@ -215,6 +191,7 @@ public class AcuaDroid extends AppCompatActivity implements
         savedInstanceState.putInt(Status_BatteryLevel, BatteryLevel);
         savedInstanceState.putInt(Status_ManTimer, ManTimer);
         savedInstanceState.putBoolean(Status_Man, isMan);
+        savedInstanceState.putBoolean(Status_twitter, isTwitterLoggedIn);
 
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
@@ -231,6 +208,7 @@ public class AcuaDroid extends AppCompatActivity implements
         BatteryLevel = savedInstanceState.getInt(Status_BatteryLevel);
         ManTimer = savedInstanceState.getInt(Status_ManTimer);
         isMan = savedInstanceState.getBoolean(Status_Man);
+        isTwitterLoggedIn = savedInstanceState.getBoolean(Status_twitter);
     }
 
     @Override
@@ -272,10 +250,27 @@ public class AcuaDroid extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         RunTimeChequer();
+        Log.w("TwitterKit", "usar_twitter: " + String.valueOf(sharedPref.getBoolean("usar_twitter", false))+ " isTwitterLoggedIn: " + String.valueOf(isTwitterLoggedIn));
         if(sharedPref.getBoolean("usar_twitter", false) && !isTwitterLoggedIn){
-            loginButton.setVisibility(View.VISIBLE);
-        }else{
-            loginButton.setVisibility(View.INVISIBLE);
+            loginButton = new TwitterLoginButton(this);
+            loginButton.setCallback(new Callback<TwitterSession>() {
+                @Override
+                public void success(Result<TwitterSession> result) {
+                    // The TwitterSession is also available through:
+                    // Twitter.getInstance().core.getSessionManager().getActiveSession()
+                    session = result.data;
+                    // TODO: Remove toast and use the TwitterSession's userID
+                    // with your app's user model
+                    isTwitterLoggedIn=true;
+                    String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                    Log.d("TwitterKit", msg);
+                }
+                @Override
+                public void failure(TwitterException exception) {
+                    Log.d("TwitterKit", "Login with Twitter failure", exception);
+                }
+            });
+            loginButton.performClick();
         }
     }
 

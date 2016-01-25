@@ -74,12 +74,5 @@
         android:layout_alignRight="@+id/progressBar"
         android:layout_alignEnd="@+id/progressBar" />
 
-    <com.twitter.sdk.android.core.identity.TwitterLoginButton
-        android:id="@+id/twitter_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/progressBar"
-        android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>
