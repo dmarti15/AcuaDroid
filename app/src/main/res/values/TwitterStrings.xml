@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Temperatura alta-->
+    <string name="HiTemp_1a">El caloreet! estamos a </string>
+    <string name="HiTemp_1b">º, voy a poner el ventilador</string>
+
+    <string name="HiTemp_2a">Buff </string>
+    <string name="HiTemp_2b">º, empieza a oler a sopa de marisco.</string>
+
+    <string name="HiTemp_3a">Oye </string>
+    <string name="HiTemp_3b">, échale un ojo a esto que estamos a</string>
+    <string name="HiTemp_3c">º</string>
+
+
+
+
+    <!-- Temperatura Baja-->
+    <string name="LowTemp_1a">Que frio!! estamos a </string>
+    <string name="LowTemp_1b">º, voy a poner la calefacción</string>
+
+    <string name="LowTemp_2a">Buff </string>
+    <string name="LowTemp_2b">º, tengo a los peces tiritando.</string>
+
+    <string name="LowTemp_3a">Oye </string>
+    <string name="LowTemp_3b">, échale un ojo a esto que estamos a</string>
+    <string name="LowTemp_3c">º</string>
+
+    <!-- Nivel Bajo-->
+    <string name="LowLevl_1a">Me estoy quedando seco! </string>
+    <string name="LowLevl_1b"> , estoy al </string>
+    <string name="LowLevl_1c">%</string>
+
+    <string name="LowLevl_2a">Me estoy quedando seco! </string>
+    <string name="LowLevl_2b"> , solo quedan </string>
+    <string name="LowLevl_2c"> Litros</string>
+
+    <string name="LowLevl_3a">Necesito agua! </string>
+    <string name="LowLevl_3b"> que me quedan </string>
+    <string name="LowLevl_3c"> Litros</string>
+
+
+    <!-- Alimentador-->
+    <string name="Feed_1">A comer! </string>
+    <string name="Feed_2">Hora de comer! </string>
+    <string name="Feed_3">¿quien quiere comer? </string>
+    <string name="Feed_4">El que quiera puede repetir… </string>
+    <string name="Feed_5">¿Que queréis tomar? ¿Escamas o bolitas? </string>
+    <string name="Feed_6">que parece que tenéis hambre. </string>
+
+
+    <!-- Amanecer-->
+    <string name="Dawn_1">Buenos dias! </string>
+    <string name="Dawn_2">Amanece en el acuario, </string>
+    <string name="Dawn_3">Hola a todo el mundo! </string>
+
+    <!-- Anochecer-->
+    <string name="Dusk_1">Buenas noches, </string>
+    <string name="Dusk_2">Venga, a dormir que es tarde, </string>
+    <string name="Dusk_3">Bueno, voy apagando por hoy,  </string>
+
+    <!-- Temperatura-->
+    <string name="Temp_Ha">Hace calor, </string>
+    <string name="Temp_Hb">Hace calorcillo, </string>
+    <string name="Temp_Fa">Hace frío, </string>
+    <string name="Temp_Fb">Hace fresquete, </string>
+    <string name="Temp_Ba">Se está bien, </string>
+    <string name="Temp_Bb">Hace buen día, </string>
+    <string name="Temp_G">º </string>
+
+    <!-- Nivel-->
+    <string name="Level_Ba">vamos bien de agua: </string>
+    <string name="Level_Bb">tenemos reservas de agua: </string>
+    <string name="Level_Ma">falta agua, solo quedan </string>
+    <string name="Level_Mb">estamos secos, tenemos un </string>
+    <string name="Level_L">Litros</string>
+    <string name="Level_P">%</string>
+
+    <!-- Enlaces-->
+    <string name="Link_Y">y </string>
+    <string name="Link_P">pero </string>
+
+</resources>

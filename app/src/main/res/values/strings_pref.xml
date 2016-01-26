@@ -19,12 +19,9 @@
     <string name="sum_feed">Configuración del alimentador automático</string>
     <string name="sum_twitter">Configuración de Twitter</string>
 
-    <!-- Preferencias Cuenta Twitter -->
-    <string name="pref_desc_twitter">Envío automático del estado por Twitter</string>
-    <string name="pref_twitter_ON">Activo</string>
-    <string name="pref_twitter_OFF">Apagado</string>
 
 
+    <!-- Preferencias Luces -->
     <string name="LigthCFG">Configuracion de Luces</string>
     <string name="Dawn">Amanecer</string>
     <string name="Dusk">Anochecer</string>
@@ -46,7 +43,7 @@
     <string name="PositiveButton">Aceptar</string>
     <string name="NegativeButton">Cancelar</string>
 
-
+    <!-- Preferencias Temperatura -->
     <string name="temp">Temperatura</string>
     <string name="mintemplow">15</string>
     <string name="mintemphigh">30</string>
@@ -59,7 +56,7 @@
     <string name="Max">Tª Máxima</string>
     <string name="Min">Tª Mínima</string>
 
-
+    <!-- Preferencias Nivel -->
     <string name="tank">Configuración del Depósito</string>
     <string name="level">Nivel del Rellenador</string>
     <string name="LevelSize">Tamaño</string>
@@ -73,7 +70,7 @@
     <string name="Percent">Porcentaje</string>
     <string name="PercentSign">%</string>
 
-
+    <!-- Preferencias Comidas -->
     <string name="feedActive">Activo</string>
     <string name="sumfeedActive">Activa para alimentar</string>
     <string name="feedHora">Hora</string>
@@ -85,6 +82,14 @@
     <string name="feed3">3ª Comida</string>
     <string name="feed4">4ª Comida</string>
     <string name="feed5">5ª Comida</string>
+
+    <!-- Preferencias Cuenta Twitter -->
+    <string name="pref_desc_twitter">Envío automático del estado por Twitter</string>
+    <string name="pref_twitter_ON">Activo</string>
+    <string name="pref_twitter_OFF">Apagado</string>
+    <string name="pref_usertwitter">Cuenta personal</string>
+    <string name="pref_usertwitter_sum">A la que llegarán las menciones</string>
+    <string name="pref_usertwitter_NULL">Introduce tu usuario de Twitter</string>
 
 <!--- OTROS AJUSTES -->
     <string name="pref_otros">Otros</string>

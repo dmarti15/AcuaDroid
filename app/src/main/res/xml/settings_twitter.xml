@@ -11,4 +11,16 @@
             android:summary="@string/pref_twitter_OFF"
             android:defaultValue="false" />
     </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_twitter"
+        android:title="@string/pref_twitter">
+        <!-- Usuario de Twitter -->
+        <EditTextPreference
+            android:key="usuario_twitter"
+            android:title="@string/pref_desc_twitter"
+            android:summary="@string/pref_twitter_OFF"
+            android:selectAllOnFocus="true"
+            android:dependency="usar_twitter"
+            android:defaultValue="" />
+    </PreferenceCategory>
 </PreferenceScreen>

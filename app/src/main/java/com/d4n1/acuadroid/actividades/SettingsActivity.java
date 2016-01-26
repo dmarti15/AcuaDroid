@@ -222,10 +222,10 @@ public class SettingsActivity extends PreferenceActivity {
                 //Preference preference = findPreference(key);
                 preference.setSummary(sharedPrefs.getString(key, "1"));
             }
-            //if (key.equals("usuario_twitter")) {
-            //    //Preference preference = findPreference(key);
-            //    preference.setSummary(sharedPrefs.getString(key, "Introduce tu usuario de Twitter"));
-            //}
+            if (key.equals("usuario_twitter")) {
+                //Preference preference = findPreference(key);
+                preference.setSummary(sharedPrefs.getString(key, getResources().getString(R.string.pref_usertwitter_NULL)));
+            }
             //if (key.equals("contraseña_twitter")) {
             //    //Preference preference = findPreference(key);
             //    preference.setSummary(sharedPrefs.getString(key, "********"));
