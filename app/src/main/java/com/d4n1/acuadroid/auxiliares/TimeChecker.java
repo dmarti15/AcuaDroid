@@ -10,10 +10,12 @@ import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,6 +33,8 @@ public class TimeChecker extends Service {
 
     int i=1;
 
+    int FaseAzul, FaseBlanca, FaseTotal, FasePrevia=-1;
+    SharedPreferences sharedPref;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -48,7 +52,17 @@ public class TimeChecker extends Service {
             Log.d("TimeChecker", "Run");
         }
         // schedule task
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         mTimer.scheduleAtFixedRate(new AcuariumCheckerTimerTask(), 0, NOTIFY_INTERVAL);
+        FaseAzul        =sharedPref.getInt("FaseA", 0);
+        FaseBlanca      =sharedPref.getInt("FaseB", 0);
+
+        //Checkeo Inicial
+        LuxAzulChecker();
+        LuxBlancaChecker();
+        TempChecher();
+        LevelChecher();
+        CheckFase();
     }
     public void onDestroy() {
         super.onDestroy();
@@ -92,6 +106,15 @@ public class TimeChecker extends Service {
             case 2:
                 LuxBlancaChecker();
                 break;
+            case 3:
+                CheckFase();
+                break;
+            case 4:
+                TempChecher();
+                break;
+            case 5:
+                LevelChecher();
+                break;
             default:
                 i=0;
         }
@@ -99,8 +122,6 @@ public class TimeChecker extends Service {
         //batteryLevel();
     };
     private void LuxAzulChecker(){
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPref.edit();
         int amazi = (Integer.valueOf(sharedPref.getString("amazi", "15")))*60;
         int amaze = (Integer.valueOf(sharedPref.getString("amaze", "17")))*60;
         int pmazi = (Integer.valueOf(sharedPref.getString("pmazi", "22")))*60;
@@ -108,31 +129,25 @@ public class TimeChecker extends Service {
         int powerA =(Integer.valueOf(sharedPref.getString("powerA","70")));
         int TiempoActual = Integer.parseInt(getHourTime())*60+Integer.parseInt(getMinutTime());
 
-
         if(amazi>TiempoActual){
-            editor.putInt("statusA",0);
-            editor.putInt("FaseA", 0);
+            sendMessage("LuxA_0");
+            FaseAzul=0;
         }else if (amazi<=TiempoActual && amaze>TiempoActual){
-            editor.putInt("statusA",map(TiempoActual,amazi,amaze,0,powerA));
-            editor.putInt("FaseA", 1);
+            sendMessage("LuxA_"+map(TiempoActual,amazi,amaze,0,powerA));
+            FaseAzul=1;
         }else if (amaze<=TiempoActual && pmazi>TiempoActual){
-            editor.putInt("statusA",powerA);
-            editor.putInt("FaseA", 2);
+            sendMessage("LuxA_"+powerA);
+            FaseAzul=2;
         }else if (pmazi<=TiempoActual && pmaze>TiempoActual){
-            editor.putInt("statusA",map(TiempoActual,amazi,amaze,0,powerA));
-            editor.putInt("FaseA", 3);
+            sendMessage("LuxA_"+map(TiempoActual,amazi,amaze,0,powerA));
+            FaseAzul=3;
         }else if (pmaze<=TiempoActual){
-            editor.putInt("statusA",0);
-            editor.putInt("FaseA", 0);
-        };
-        editor.apply();
-
-        Log.d("TimeChecker", "LuzAzul="+sharedPref.getInt("statusA",-1));
+            sendMessage("LuxA_0");
+            FaseAzul=0;
+        }
     }
 
     private void LuxBlancaChecker(){
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPref.edit();
         int ambli = (Integer.valueOf(sharedPref.getString("ambli", "15")))*60;
         int amble = (Integer.valueOf(sharedPref.getString("amble", "17")))*60;
         int pmbli = (Integer.valueOf(sharedPref.getString("pmbli", "22")))*60;
@@ -142,24 +157,56 @@ public class TimeChecker extends Service {
 
 
         if(ambli>TiempoActual){
-            editor.putInt("statusB", 0);
-            editor.putInt("FaseB", 0);
+            sendMessage("LuxB_0");
+            FaseBlanca=0;
         }else if (ambli<=TiempoActual && amble>TiempoActual){
-            editor.putInt("statusB",map(TiempoActual,ambli,amble,0,powerB));
-            editor.putInt("FaseB", 1);
+            sendMessage("LuxB_"+map(TiempoActual,ambli,amble,0,powerB));
+            FaseBlanca=1;
         }else if (amble<=TiempoActual && pmbli>TiempoActual){
-            editor.putInt("statusB",powerB);
-            editor.putInt("FaseB", 2);
+            sendMessage("LuxB_"+powerB);
+            FaseBlanca=2;
         }else if (pmbli<=TiempoActual && pmble>TiempoActual){
-            editor.putInt("statusB",map(TiempoActual,ambli,amble,0,powerB));
-            editor.putInt("FaseB", 3);
+            sendMessage("LuxB_"+map(TiempoActual,ambli,amble,0,powerB));
+            FaseBlanca=3;
         }else if (pmble<=TiempoActual){
-            editor.putInt("statusB",0);
-            editor.putInt("FaseB", 0);
-        };
-        editor.apply();
-        Log.d("TimeChecker", "LuzBlanca="+sharedPref.getInt("statusB",-1));
+            sendMessage("LuxB_0");
+            FaseBlanca=0;
+        }
     }
+
+    private void TempChecher(){
+        //TODO Cambiar el random por la lectura del termometro
+        Random r = new Random();
+        int Temp=r.nextInt(10)+20;
+
+        if (Temp < Integer.valueOf(sharedPref.getString("temp_min", "0"))) {
+            sendMessage("Cold_"+Temp);
+            //Log.d("AcuaDroid", "Hace frio "+AcuaDroidStatus.getTemp()+">"+sharedPref.getString("temp_min", "0"));
+        } else if (Temp > Integer.valueOf(sharedPref.getString("temp_max", "0"))) {
+            sendMessage("Heat_"+Temp);
+            //Log.d("AcuaDroid", "Hace calor");
+        } else {
+            sendMessage("Warm_"+Temp);
+            //Log.d("AcuaDroid", "Hace bueno");
+        }
+
+    }
+
+    private void LevelChecher(){
+        //TODO Cambiar el random por la lectura del termometro
+        Random r = new Random();
+        int Levl=r.nextInt(40);
+
+        if (Levl < Integer.valueOf(sharedPref.getString("LevlAlarm", "15"))) {
+            sendMessage("LowL_"+Levl);
+            //Log.d("AcuaDroid", "Hace frio "+AcuaDroidStatus.getTemp()+">"+sharedPref.getString("temp_min", "0"));
+        } else {
+            sendMessage("LvOk_"+Levl);
+            //Log.d("AcuaDroid", "Hace bueno");
+        }
+
+    }
+
 
     //TODO Error al instanciar varios receiver
     private void batteryLevel() {
@@ -185,5 +232,37 @@ public class TimeChecker extends Service {
     int map(int x, int in_min, int in_max, int out_min, int out_max)
     {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+
+    // Send an Intent with an action named "my-event".
+    private void sendMessage(String Valor) {
+        Intent intent = new Intent("AcuaDroid");
+        // add data
+        intent.putExtra("message", Valor);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void CheckFase(){
+        if (FaseAzul == 2 && FaseBlanca == 2) FaseTotal = 2;
+        else if (FaseAzul == 1 || FaseBlanca == 1 || FaseAzul == 2) FaseTotal = 1;
+        else if (FaseAzul == 3 || FaseBlanca == 3 || FaseBlanca == 2) FaseTotal = 3;
+        else if (FaseAzul == 0 && FaseBlanca == 0) FaseTotal = 0;
+
+        if(FaseTotal!=FasePrevia){
+            switch (FaseTotal){
+                case 0:
+                    sendMessage("Noch");
+                    break;
+                case 1:
+                    sendMessage("Dawn");
+                    break;
+                case 2:
+                    sendMessage("Dia_");
+                    break;
+                case 3:
+                    sendMessage("Dusk");
+                    break;
+            }
+        }
     }
 }

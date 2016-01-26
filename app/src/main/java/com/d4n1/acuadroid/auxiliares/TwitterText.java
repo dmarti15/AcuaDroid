@@ -12,8 +12,8 @@ import java.util.Random;
  * Created by dmartinm on 26/01/2016.
  */
 public class TwitterText {
-    Context ctx;
-    SharedPreferences sharedPref;
+    private Context ctx;
+    private SharedPreferences sharedPref;
     public TwitterText(Context context){
         ctx=context;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);

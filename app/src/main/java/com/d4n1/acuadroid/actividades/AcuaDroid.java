@@ -1,14 +1,17 @@
 package com.d4n1.acuadroid.actividades;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 
 import com.d4n1.acuadroid.R;
 import com.d4n1.acuadroid.auxiliares.TimeChecker;
+import com.d4n1.acuadroid.auxiliares.TwitterText;
 import com.d4n1.acuadroid.dialogos.ManLuxA;
 import com.d4n1.acuadroid.dialogos.ManLuxB;
 import com.twitter.sdk.android.Twitter;
@@ -51,8 +55,7 @@ public class AcuaDroid extends AppCompatActivity implements
     private TwitterSession session;
 
 
-
-
+    private TwitterText tt;
 
 
     //AcuaDroidStatus AcuaDroidStatus;
@@ -91,10 +94,11 @@ public class AcuaDroid extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        tt = new TwitterText(this);
+
         isMan = false;
         ManTimer = 0;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
 
 
         setSupportActionBar(toolbar);
@@ -108,7 +112,7 @@ public class AcuaDroid extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 try {
-                    Tweet();
+                    Tweet(tt.getFeed());
                     Snackbar.make(view, R.string.txt_FloatingButton, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 } catch (Exception e) {
@@ -129,31 +133,6 @@ public class AcuaDroid extends AppCompatActivity implements
         txTemp = (TextView) findViewById(R.id.txTemp);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(Integer.valueOf(sharedPref.getString("TiempoManual", "10")) * 60);
-
-        t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                UpdateAcuaDroidStatus();
-                            }
-                        });
-                        Thread.sleep(1000);
-                    }
-                } catch (InterruptedException e) {
-                    Log.d("AcuaDroid", "Thread Error: " + e.getMessage());
-                }
-            }
-        };
-        if (!t.isAlive()) {
-            Log.d("AcuaDroid", "Arranca Ticker");
-            t.start();
-        }
-
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,11 +142,10 @@ public class AcuaDroid extends AppCompatActivity implements
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void Tweet(){
+    public void Tweet(String txt){
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient(session);
         StatusesService statusesService = twitterApiClient.getStatusesService();
-        statusesService.update("Vale,pues ya se twitear :)", null, false, null, null,
-                null, null, null, new Callback<Tweet>() {
+        statusesService.update(txt, null, false, null, null, null,null, null, null, new Callback<Tweet>() {
                     @Override
                     public void success(Result<Tweet> result) {
                         //Do something with result, which provides a Tweet inside of result.data
@@ -272,100 +250,45 @@ public class AcuaDroid extends AppCompatActivity implements
             });
             loginButton.performClick();
         }
+        // Register mMessageReceiver to receive messages.
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("AcuaDroid"));
     }
 
-    public void ResfreshScreen() {
-        txStatusA.setText(sLuxA());
-        txStatusB.setText(sLuxB());
-        txTemp.setText(sTemp());
-        int fA = sharedPref.getInt("FaseA", -1);
-        int fB = sharedPref.getInt("FaseB", -1);
-        int fX = -1;
-        if (fA == 2 && fB == 2) fX = 2;
-        else if (fA == 1 || fB == 1 || fA == 2) fX = 1;
-        else if (fA == 3 || fB == 3 || fB == 2) fX = 3;
-        else if (fA == 0 && fB == 0) fX = 0;
 
-        switch (fX) {
-            case 0:
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    RelLay.setBackgroundResource(R.drawable.noche);
-                } else {
-                    RelLay.setBackgroundColor(getResources().getColor(R.color.cNoche));
-                }
-                Fase = getResources().getString(R.string.Fase0);
-                break;
-            case 1:
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    RelLay.setBackgroundResource(R.drawable.amanecer);
-                } else {
-                    RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
-                }
-                Fase = getResources().getString(R.string.Fase1);
-                break;
-            case 2:
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    RelLay.setBackgroundResource(R.drawable.dia);
-                } else {
-                    RelLay.setBackgroundColor(getResources().getColor(R.color.cDia));
-                }
-                Fase = getResources().getString(R.string.Fase2);
-                break;
-            case 3:
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    RelLay.setBackgroundResource(R.drawable.amanecer);
-                } else {
-                    RelLay.setBackgroundColor(getResources().getColor(R.color.cAmanecer));
-                }
-                Fase = getResources().getString(R.string.Fase3);
-                break;
-            default:
-                RelLay.setBackgroundColor(getResources().getColor(R.color.cError));
-                Fase = getResources().getString(R.string.FaseX);
-                Log.d("AcuaDroid", Fase + ":" + fX);
-                break;
-        }
-        if (Temp < Integer.valueOf(sharedPref.getString("temp_min", "0"))) {
-            txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorCold));
-            //Log.d("AcuaDroid", "Hace frio "+AcuaDroidStatus.getTemp()+">"+sharedPref.getString("temp_min", "0"));
-        } else if (Temp > Integer.valueOf(sharedPref.getString("temp_max", "0"))) {
-            txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorHot));
-            //Log.d("AcuaDroid", "Hace calor");
-        } else {
-            txTemp.setTextColor(ContextCompat.getColor(this, R.color.colorWarm));
-            //Log.d("AcuaDroid", "Hace bueno");
-        }
-        progressBar.setProgress(ManTimer);
-    }
 
     public void UpdateAcuaDroidStatus() {
         if (isMan) {
             if (ManTimer > 0) {
+                progressBar.setProgress(ManTimer);
                 ManTimer--;
                 Log.d("AcuaDroid", "Modo Manual: " + ManTimer + "sec ");
             } else {
                 SetManOff();
             }
-        } else {
-            LuxA = sharedPref.getInt("statusA", 0);
-            LuxB = sharedPref.getInt("statusB", 0);
-            //      AcuaDroidStatus.setBatteryLevel(sharedPref.getInt("Temp", 0));
-            //Log.d("AcuaDroid", "Modo Auto");
         }
-        ResfreshScreen();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
+        // Unregister since the activity is not visible
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         StopTimeChequer();
+        super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         StopTimeChequer();
-        t.interrupt();
+        // Unregister since the activity is not visible
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        if(t != null){
+            if (t.isAlive()) {
+                Log.d("AcuaDroid", "onDestroy");
+                t.interrupt();
+            }
+        }
+        super.onDestroy();
     }
 
 
@@ -382,47 +305,170 @@ public class AcuaDroid extends AppCompatActivity implements
     @Override
     public void onPossitiveLuxAButtonClick(int pow) {
         Log.d("AcuaDroid", "Modo Manual Azul MA: " + pow + "pow ");
-        LuxA = pow;
         SetManOn();
-        txStatusA.setText(sLuxA());
+        txStatusA.setText(sLux(pow));
     }
 
     @Override
     public void onPossitiveLuxBButtonClick(int pow) {
-        LuxB = pow;
         SetManOn();
-        txStatusB.setText(sLuxB());
+        txStatusB.setText(sLux(pow));
     }
 
 
     public void SetManOn() {
         if (!isMan) {
             ManTimer = Integer.valueOf(sharedPref.getString("TiempoManual", "10")) * 60;
+            progressBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorWarm), PorterDuff.Mode.SRC_IN);
             isMan = true;
             StopTimeChequer();
             Log.d("AcuaDroid", "Modo Manual ON");
+
+            t = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        while (!isInterrupted()) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    UpdateAcuaDroidStatus();
+                                }
+                            });
+                            Thread.sleep(1000);
+                        }
+                    } catch (InterruptedException e) {
+                        Log.d("AcuaDroid", "Thread Error: " + e.getMessage());
+                    }
+                }
+            };
+            if (!t.isAlive()) {
+                Log.d("AcuaDroid", "Arranca Ticker");
+                t.start();
+            }
         }
     }
 
     public void SetManOff() {
         if (isMan) {
             ManTimer = 0;
+            t.interrupt();
             isMan = false;
             RunTimeChequer();
             Log.d("AcuaDroid", "Modo Manual OFF");
         }
     }
 
-    String sLuxA() {
-        return LuxA + getString(R.string.PercentSign);
+    String sLux(int pow) {
+        return pow + getString(R.string.PercentSign);
     }
 
-    String sLuxB() {
-        return LuxB + getString(R.string.PercentSign);
+    String sTemp(int temp) {
+        return temp + getString(R.string.grados);
     }
 
-    String sTemp() {
-        return Temp + getString(R.string.grados);
+    // handler for received Intents for the "my-event" event
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Extract data included in the Intent
+            String message = intent.getStringExtra("message");
+            Log.d("receiver", "Got message: " + message);
+            switch (message.substring(0,4)){
+                case "Noch":
+                    setBackground(0);
+                    break;
+                case "Dawn":
+                    setBackground(1);
+                    break;
+                case "Dia_":
+                    setBackground(2);
+                    break;
+                case "Dusk":
+                    setBackground(3);
+                    break;
+                case "Cold":
+                    setCold(Integer.valueOf(message.substring(5)));
+                    break;
+                case "Heat":
+                    setHeat(Integer.valueOf(message.substring(5)));
+                break;
+                case "Warm":
+                    setWarm(Integer.valueOf(message.substring(5)));
+                    break;
+                case "LLvl":
+                    setLowLevel(Integer.valueOf(message.substring(5)));
+                    break;
+                case "LvOk":
+                    setLevelOK(Integer.valueOf(message.substring(5)));
+                    break;
+                case "LuxA":
+                    setLuxA(Integer.valueOf(message.substring(5)));
+                    break;
+                case "LuxB":
+                    setLuxB(Integer.valueOf(message.substring(5)));
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+
+    private void setBackground(int Fase){
+        switch (Fase) {
+            case 0:
+                    RelLay.setBackgroundResource(R.drawable.noche);
+                break;
+            case 1:
+                    RelLay.setBackgroundResource(R.drawable.amanecer);
+                break;
+            case 2:
+               RelLay.setBackgroundResource(R.drawable.dia);
+                break;
+            case 3:
+                    RelLay.setBackgroundResource(R.drawable.amanecer);
+                break;
+            default:
+                break;
+        }
+    }
+//TODO No se ve la temperatura
+    private void setCold(int T){
+        txTemp.setTextColor(getResources().getColor(R.color.colorCold));
+        txTemp.setText(sTemp(T));
+        Log.d("AcuaDroid", "Frio: "+sTemp(T));
+    }
+    private void setHeat(int T){
+        txTemp.setTextColor(getResources().getColor(R.color.colorHot));
+        txTemp.setText(sTemp(T));
+        Log.d("AcuaDroid", "Calor: "+sTemp(T));
+    }
+    private void setWarm(int T){
+        txTemp.setTextColor(getResources().getColor(R.color.colorWarm));
+        txTemp.setText(sTemp(T));
+        Log.d("AcuaDroid", "Bien: "+sTemp(T));
+    }
+
+    private void setLowLevel(int L){
+        progressBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorHot), PorterDuff.Mode.SRC_IN);
+        progressBar.setProgress(L);
+        Log.d("AcuaDroid", "Low Level: "+L);
+    }
+
+    private void setLevelOK(int L){
+        progressBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorCold), PorterDuff.Mode.SRC_IN);
+        progressBar.setProgress(L);
+        Log.d("AcuaDroid", "OK Level: "+L);
+    }
+
+    private void setLuxA(int L){
+        txStatusA.setText(sLux(L));
+        Log.d("AcuaDroid", "LuxA: "+sLux(L));
+    }
+    private void setLuxB(int L){
+        txStatusB.setText(sLux(L));
+        Log.d("AcuaDroid", "LuxB: "+sLux(L));
     }
 
 
