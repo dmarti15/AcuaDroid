@@ -16,10 +16,12 @@
     <string name="Fase1">Amanecer</string>
     <string name="Fase2">Día</string>
     <string name="Fase3">Anochecer</string>
+    <string name="title_activity_bt_devices">bt_devices</string>
 
 
-
-
+    <string name="Conectar">Conectar</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="MsgConfirmarConexion">¿Conectar?</string>
 
 
 </resources>

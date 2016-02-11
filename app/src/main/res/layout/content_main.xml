@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:id="@+id/LayoutFondo">
 
+    <ListView
+        android:id="@+id/lvDispositivos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7">
+    </ListView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,8 +67,6 @@
         android:layout_marginRight="25dp"
         android:layout_alignLeft="@+id/TitleStatusB"
         android:layout_alignStart="@+id/TitleStatusB" />
-
-
 
 
 
